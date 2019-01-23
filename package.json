@@ -1,0 +1,16 @@
+{
+  "name": "vcb",
+  "version": "0.0.1",
+  "description": "Kamino's Discord Bot",
+  "main": "ksrpg.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "KaminoShimobe",
+  "license": "ISC",
+  "dependencies": {
+    "danbooru": "^3.0.8",
+    "discord.js": "^11.3.2",
+    "mysql": "^2.15.0"
+  }
+}
