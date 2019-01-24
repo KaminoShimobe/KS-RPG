@@ -36,7 +36,42 @@ bot.on("ready", async () => {
 });
 
 
+var con_fig = {
+	host: "us-cdbr-iron-east-03.cleardb.net",
+	user: "bbd7576b85e61c",
+	password: process.env.MY_SQL,
+	database: "heroku_5a385f0d66fa896",
+	port: 3306
+};
 
+var con;
+
+function handleDisconnect() {
+con = mysql.createConnection(con_fig);
+con.connect(function(err) {              // The server is either down
+    if(err) {                                     // or restarting (takes a while sometimes).
+      console.log('error when connecting to db:', err);
+      setTimeout(handleDisconnect, 2000); // We introduce a delay before attempting to reconnect,
+    }                                     // to avoid a hot loop, and to allow our node script to
+  }); 	
+
+process.on('uncaughtException', function (err) {
+    console.log(err);
+	
+}); 
+	
+
+
+con.on('error', function(err) {
+    console.log('db error', err);
+    if(err.code === 'PROTOCOL_CONNECTION_LOST') { // Connection to the MySQL server is usually
+      handleDisconnect();                         // lost due to either server restart, or a
+    } else {                                      // connnection idle timeout (the wait_timeout
+       throw err;                                 // server variable configures this)
+    }
+});
+       }
+handleDisconnect();
 
 bot.on("message", async message => {
 
