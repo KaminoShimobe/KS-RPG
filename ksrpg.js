@@ -121,8 +121,16 @@ bot.on("message", async message => {
 		return;
 
 	}
-
-
+	
+	if(command === `${prefix}table`){
+	if(message.author.id == '242118931769196544'){
+	var sql = "CREATE TABLE user (id VARCHAR(30), class VARCHAR(30), inventory VARCHAR(30), location VARCHAR(30), status VARCHAR(30), hp INT, atk INT, def INT, mAtk INT, mDef INT, spd INT, money INT, lvl INT, turn INT)";
+  	con.query(sql, function (err, result) {
+    	if (err) throw err;
+    	message.author.send("Table created");
+  	});
+	}
+	}
 
 
 
