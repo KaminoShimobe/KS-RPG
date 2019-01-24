@@ -862,7 +862,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 	}
 	}
 			
-	if(command === `${prefix}table`){
+	if(command === `${prefix}drop`){
 	if(message.author.id == '242118931769196544'){
 	var sql = "DROP TABLE user";
   	con.query(sql, function (err, result) {
