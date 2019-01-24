@@ -83,11 +83,305 @@ bot.on("message", async message => {
 
 	if(message.author.bot) return;
 	
+	function mortal(){
+		
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		if(rows.length < 1) {
+			
+			sql = `INSERT INTO user (id, class, inventory, location, status, hp, atk, def, matk, mdef, spd, money, lvl, turn) VALUES ('${message.author.id}', 'mortal', '', '', '', ${125}, ${5}, ${5}, ${5}, ${5}, ${5}, ${0}, ${1}, ${0})`;
+			con.query(sql, console.log);
+			message.channel.send("Mortal class selected! use command `>view [user]` to view someone else's info, or `>view` to view your own info!");
+			return;
+		}	else {
+
+			message.reply(" You have a KSRPG account!");
+			
+
+			
+			return;
+		}
+
+
+		});
+		
+
+		
+	}
 	
+	function mage(){
+		
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		if(rows.length < 1) {
+			
+			sql = `INSERT INTO user (id, class, inventory, location, status, hp, atk, def, matk, mdef, spd, money, lvl, turn) VALUES ('${message.author.id}', 'mage', '', '', '', ${100}, ${3}, ${3}, ${7}, ${7}, ${5}, ${0}, ${1}, ${0})`;
+			con.query(sql, console.log);
+			message.channel.send("Mage class selected! use command `>view [user]` to view someone else's info, or `>view` to view your own info!");
+			return;
+		}	else {
+
+			message.reply(" You have a KSRPG account!");
+			
+
+			
+			return;
+		}
+
+
+		});
+		
+
+		
+	}
+	
+	function martial(){
+		
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		if(rows.length < 1) {
+			
+			sql = `INSERT INTO user (id, class, inventory, location, status, hp, atk, def, matk, mdef, spd, money, lvl, turn) VALUES ('${message.author.id}', 'martial artist', '', '', '', ${135}, ${7}, ${7}, ${3}, ${3}, ${5}, ${0}, ${1}, ${0})`;
+			con.query(sql, console.log);
+			message.channel.send("Martial Artist class selected! use command `>view [user]` to view someone else's info, or `>view` to view your own info!");
+			return;
+		}	else {
+
+			message.reply(" You have a KSRPG account!");
+			
+
+			
+			return;
+		}
+
+
+		});
+		
+
+		
+	}
+	
+	function marksman(){
+		
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		if(rows.length < 1) {
+			
+			sql = `INSERT INTO user (id, class, inventory, location, status, hp, atk, def, matk, mdef, spd, money, lvl, turn) VALUES ('${message.author.id}', 'marksman', '', '', '', ${100}, ${7}, ${2}, ${7}, ${2}, ${7}, ${0}, ${1}, ${0})`;
+			con.query(sql, console.log);
+			message.channel.send("Marksman class selected! use command `>view [user]` to view someone else's info, or `>view` to view your own info!");
+			return;
+		}	else {
+
+			message.reply(" You have a KSRPG account!");
+			
+
+			
+			return;
+		}
+
+
+		});
+		
+
+		
+	}
+	
+	
+	
+	function choose(){
+		message.author.send(" which class would you want? \n `>mortal` : \n Balanced stats and can use most weapons \n `>mage` : \n Stronger in magic stats but weak in physical stats \n `>martialArtist` : \n Stronger in physical stats but weak in magic stats \n `>marksman` : Fast. Furious. Frail."); 
+	const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+        		collector.once('collect', message => {
+            		if (message.content == `${prefix}mortal`) {
+               		mortal();
+                		return;
+            		} else if (message.content == `${prefix}mage`) {
+               		mage();
+                		return;
+            		} else if (message.content == `${prefix}martialArtist`) {
+               		martial();
+                		return;
+            		} else if (message.content == `${prefix}marksman`) {
+               		marksman();
+                		return;
+            		}
+				else {
+				message.author.send("Not a valid response!");		
+			}
+			});
+	
+	
+       }
+	
+	function viewUser(){
+		
+	
+con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(rows.length < 1) {
+			message.reply("You have no KSRPG account!");
+			console.log(rows);
+			return;
+		}
+	
+		let clas = rows[0].class;
+		let location = rows[0].location;
+		let status = rows[0].status;
+		let hp = rows[0].hp;
+		let atk = rows[0].atk;
+		let def = rows[0].def;
+		let mAtk = rows[0].mAtk;
+		let mDef = rows[0].mDef;
+		let spd = rows[0].spd;
+		let money = rows[0].money;
+		let level = rows[0].lvl;
+		let turn = rows[0].turn;
+				
+
+		let stats = new Discord.RichEmbed()
+
+			
+			.setAuthor(message.author.username)
+			.setDescription("Lvl: " + level + " \n Class: \n" + clas + "\n Location: \n" + location +  "\n Floor: " + turn + "\n Status: \n" + status + "\n $" + money + "\n HP: " + hp + "\n ATK: " + atk + "\n DEF:" + def + "\n mAtk:" +  mAtk + "\n mDef: "+ mDef + "\n SPD: " + spd )
+			.setColor("#4286f4"); 
+
+		message.author.sendEmbed(stats);
+
+
+		
+		
+
+	});
+	}
+	
+	
+let other = message.mentions.users.first();
+
+function viewOtherUser(){
 	
 
+con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		if(!rows[0]) return message.channel.send("They don't have a KSRPG account!");
+
+		
+		let clas = rows[0].class;
+		let location = rows[0].location;
+		let status = rows[0].status;
+		let level = rows[0].lvl;
+		let turn = rows[0].turn;
+				
+
+		let stats = new Discord.RichEmbed()
+
+			
+			.setAuthor(other.username)
+			.setDescription("Lvl: " + level + " \n Class: \n" + clas + "\n Location: \n" + location +  "\n Floor: " + turn)
+			.setColor("#d10026"); 
+
+		message.channel.sendEmbed(stats);
+
+
+		
+		
+
+	});
+	return;
+}
+	
+	function deleteUser(){
+
+con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+
+		let sql;
+		if(rows.length < 1) {
+			message.reply("You have no user.");
+			console.log(rows);
+		} else {
+			sql = `DELETE FROM user WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);
+			message.reply(" KSRPG account deleted! `>user` to create a new one!");
+		}
+
+	});
+	return;
+}
+	
+
+	if(command === `${prefix}view` && messageArray[1] === undefined){
+			
+
+		viewUser();
+		
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
+
+	if(command === `${prefix}user`){
+			
+		choose();
+		
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
+
+	
 	if(message.channel.type === "dm") return;
+	
+	if(command === `${prefix}view` && messageArray[1] != undefined ){
+			
+		viewOtherUser();
+		
 
+			
+
+		 return; 
+
+		
+
+		
+
+	}
+	
+	if(command === `${prefix}delete`){
+			
+		deleteUser();
+		
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
+	
+	
+	
 	if(command === `${prefix}help`){
 		
 		let help = new Discord.RichEmbed()
@@ -110,8 +404,8 @@ bot.on("message", async message => {
 		let help = new Discord.RichEmbed()
 
 			
-			.setTitle("Patch Notes 1/23/29")
-			.setDescription("-Adding stuff now so this bot can be badass :sunglasses:")
+			.setTitle("Patch Notes 1/24/29")
+			.setDescription("-Adding stuff now so this bot can be badass :sunglasses: \n - Can view users and self.")
 			.setColor("#ff9a0c"); 
 
 		message.channel.send(help);
