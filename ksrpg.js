@@ -80,7 +80,34 @@ bot.on("message", async message => {
 	let command = messageArray[0];
 
 	let args = messageArray.slice(1);
+	if(message.author.bot == true && command === ">ADD" && messageArray[2] != undefined){
+		let other = message.mentions.users.first();
+		con.query(`SELECT * FROM user WHERE id = '${other.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let money = rows[0].money;
+		var funds = parseInt(messageArray[2]);	
+		if(rows.length < 1) {
+			
+			message.channel.send("This person doesn't have a KSRPG account!");
+			return;
+		}	else {
 
+			
+			sql = `UPDATE user SET money = ${money + funds} WHERE id = '${other.id}'`;
+         
+       			 con.query(sql); 
+           			message.channel.send(other.username + " transferred $" + funds + " to their KSRPG account!");
+
+			
+			return;
+		}
+
+
+		});
+	}
+	
+	
 	if(message.author.bot) return;
 	
 	function mortal(){
@@ -315,7 +342,35 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 	return;
 }
 	
+if(command === `${prefix}add` && messageArray[1] != undefined){
+		
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let money = rows[0].money;
+		var funds = parseInt(messageArray[1]);	
+	
+		if(rows.length < 1) {
+			
+			message.channel.send("This person doesn't have a KSRPG account!");
+			return;
+		}	else {
 
+			if(money > funds && Number.isInteger(funds) === true && funds > 0){
+			sql = `UPDATE user SET money = ${money - funds} WHERE id = '${other.id}'`;
+         
+       			 con.query(sql); 
+           		message.channel.send("!ADD " + message.author + funds);
+
+			} else{
+				message.channel.send("Invalid Input.");
+			}
+			return;
+		}
+
+
+		});
+	}	
 	if(command === `${prefix}view` && messageArray[1] === undefined){
 			
 
