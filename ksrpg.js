@@ -402,387 +402,699 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 
 	}
 	
-// 	function searchForest(){
+	function searchForest(){
 
-// 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-// 		if(err) throw err;
-// 		let sql;
-// 		if(rows.length < 1) {
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		if(rows.length < 1) {
 			
 			
-// 			message.author.send("Create an KSRPG account with `>user`!");
+			message.author.send("Create an KSRPG account with `>user`!");
 			
-// 		}	else {
+		}	else {
 
-//  			sql = `UPDATE user SET location = 'Forest', turn = ${1} WHERE id = '${message.author.id}'`;
-// 			con.query(sql, console.log);
-// 			message.author.send("Welcome to the forest! Type `!go` to progress to the next floor!");
+ 			sql = `UPDATE user SET location = 'Forest', turn = ${1} WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);
+			message.author.send("Welcome to the forest! Type `!go` to progress to the next floor!");
 			
 			
-// 		}
-// 			});
-// 		return;
-// 	}
+		}
+			});
+		return;
+	}
 	
 	
-// 	function goMoney(){
-// 		con.query(`SELECT * FROM user WHERE id = 'ENEMY'`, (err, rows) => {
-// 		if(err) throw err;
-// 		let funds = rows[0].money;
-// 		let monster = rows[0].class;
-// 			if(rows.length < 1) {
+	
+	function progress(){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let floor = rows[0].turn;	
+		if(rows.length < 1) {
 			
-// 			return;
-// 		} else{
 			
-// 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-// 		if(err) throw err;
-// 		let money = rows[0].money;
-// 			if(rows.length < 1) {
+			message.author.send("Create an KSRPG account with `>user`!");
 			
-// 			return;
-// 		}	else {
+		}	else {
+
+ 			sql = `UPDATE user SET turn = ${floor + 1} WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);
+			message.author.send("Proceeded to floor **" + floor + "**");
+			return;
+			
+		}
+			});
+		return;	
+	}
+	
+	function goFunds(){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let money = rows[0].money;
+		let floor = rows[0].turn;
+			let sql;
+			if(rows.length < 1) {
+			
+			return;
+		}	else {
+			
+			var funds = turn * Math.floor(Math.random() * 9999) + 1;
+			
+ 			
+			sql = `UPDATE user SET money = ${money + funds} WHERE id = '${message.author.id}'`;
+			con.query(sql);
+			message.author.send("You found $" + funds +"!");
+			progress();
+			return;
+		}
+		});	
+				
+	}
+	
+	
+	function goMoney(){
+		con.query(`SELECT * FROM user WHERE id = 'ENEMY'`, (err, rows) => {
+		if(err) throw err;
+		let funds = rows[0].money;
+		let monster = rows[0].class;
+			let sql;
+			if(rows.length < 1) {
+			
+			return;
+		} else{
+			sql = `DELETE FROM user WHERE id = 'ENEMY'`;
+			con.query(sql, console.log);
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let money = rows[0].money;
+			if(rows.length < 1) {
+			
+			return;
+		}	else {
 			
 			
 			
  			
-// 			sql = `UPDATE user SET money = ${money + funds} WHERE id = '${message.author.id}'`;
-// 			con.query(sql);
-// 			message.author.send("You found $" + funds +" from the defeated " + monster + "!");
-// 			return;
-// 		}
-// 		});	
-// 		}
-// 		});		
-// 	}
+			sql = `UPDATE user SET money = ${money + funds} WHERE id = '${message.author.id}'`;
+			con.query(sql);
+			message.author.send("You found $" + funds +" from the defeated " + monster + "!");
+			progress();
+			return;
+		}
+		});	
+		}
+		});		
+	}
 	
-// 		function goLose(){
-// 		con.query(`SELECT * FROM user WHERE id = 'ENEMY'`, (err, rows) => {
-// 		if(err) throw err;
-// 		let sql;
+		function goLose(){
+		con.query(`SELECT * FROM user WHERE id = 'ENEMY'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
 		
-// 		if(rows.length < 1) {
+		if(rows.length < 1) {
 			
 			
 			
-// 		}	else {
+		}	else {
 			
 			
-// 				sql = `DELETE FROM user WHERE id = 'ENEMY'`;
-// 				con.query(sql, console.log);
+				sql = `DELETE FROM user WHERE id = 'ENEMY'`;
+				con.query(sql, console.log);
 				
 			
 			
-// 		}
-// 			});
-// 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-// 		if(err) throw err;
-// 		let sql;
+		}
+			});
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
 		
-// 		if(rows.length < 1) {
+		if(rows.length < 1) {
 			
 			
 			
-// 		}	else {
+		}	else {
 			
 			
-// 				sql = `UPDATE user SET location = '', turn = ${0} WHERE id = '${message.author.id}'`;
-// 				con.query(sql, console.log);
-// 				message.author.send("You have been defeated! You must start another quest with `>search [location]`");
+				sql = `UPDATE user SET location = '', turn = ${0} WHERE id = '${message.author.id}'`;
+				con.query(sql, console.log);
+				message.author.send("You have been defeated! You must start another quest with `>search [location]`");
 			
-// 				return;
-// 		}
-// 			});	
-// 	}
+				return;
+		}
+			});	
+	}
 	
-// 	function battle(){
-// 		let statsID = 'ST' + message.author.id;
-// 			con.query(`SELECT * FROM user WHERE id = '${statsID}'`, (err, rows) => {
-// 			if(err) throw err;
-// 		let status = rows[0].status;
-// 		let skills = rows[0].inventory;
-// 		let hp = rows[0].hp;
-// 		let atk = rows[0].atk;
-// 		let def = rows[0].def;
-// 		let mAtk = rows[0].mAtk;
-// 		let mDef = rows[0].mDef;
-// 		let spd = rows[0].spd;	
-// 		let turn = rows[0].turn;	
-// 		var roll = Math.floor(Math.random() * 6) + 1;	
+	function goExp(){
+		con.query(`SELECT * FROM user WHERE id = 'ENEMY'`, (err, rows) => {
+		if(err) throw err;
+		let Elvl = rows[0].lvl;
+		let monster = rows[0].class;
+			let sql;
+			if(rows.length < 1) {
+			
+			return;
+		} else{
+			var exp;
+			if(monster == "Slime"){
+				exp = Elvl * Math.floor(Math.random() * 5) + 1;
+			} else if(monster == "Dragon"){
+				exp = Elvl * Math.floor(Math.random() * 10) + 1;
+			} else {
+				exp = Elvl * Math.floor(Math.random() * 20) + 1;
+			}	
+		let statsID = 'ST' + message.author.id;
+		con.query(`SELECT * FROM user WHERE id = '${statsID}'`, (err, rows) => {
+		if(err) throw err;	
+			let cap = rows[0].lvl;
+			
+			sql = `UPDATE user SET lvl = ${cap + exp} WHERE id = '${statsID}'`;
+			con.query(sql);
+			message.author.send("You gained **" + exp + "** experience points!");
+			
 		
-// 				con.query(`SELECT * FROM user WHERE id = 'ENEMY'`, (err, rows) => {
-// 				if(err) throw err;
-// 				let sql;
-// 				let statusE = rows[0].status;
-// 				let hpE = rows[0].hp;
-// 				let defE = rows[0].def;
-// 				var dmg = (atk * roll);
-// 				var ddmg =  dmg - defE;			
-// 				message.author.send("HP: **" + hp + "\n Skills: **" + skills + "** \n" "** \n Turn: **" + turn + "** \n ""What will you do? \n >fight \n >defend \n >skill [skill] \n >item \n >flee")
-// 				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
-//         		collector.once('collect', message => {
-//             		if (message.content == `${prefix}fight`) {
+			
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let lvl = rows[0].lvl;
+		let hp = rows[0].hp;
+		let atk = rows[0].atk;
+		let def = rows[0].def;
+		let mAtk = rows[0].mAtk;
+		let mDef = rows[0].mDef;
+		let spd = rows[0].spd;	
+			let sql2;
+			if(rows.length < 1) {
+			
+			return;
+		}	else {
+			
+			var lvlUP = lvl * 100;
+			
+			function allocate(){
+			let sql3;
+			message.author.send("You leveled up! Which stat would you like to allocate to? \n >hp \n >atk \n >def \n >matk \n >mdef \n >spd");
+			const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+        		collector.once('collect', message => {
+            		if (message.content == `${prefix}hp`) {
                		
-// 					if(statusE == "defending"){
-// 					sql = `UPDATE user SET hp = ${hp - ddmg} WHERE id = 'ENEMY'`;
-// 					con.query(sql, console.log);
-// 					eTurn();
-// 					} else {
-// 					sql = `UPDATE user SET hp = ${hp - dmg} WHERE id = 'ENEMY'`;
-// 					con.query(sql, console.log);
-// 					eTurn();
-// 					}
-						
-//                 		return;
-//             		} else if (message.content == `${prefix}defend`) {
-//                				sql = `UPDATE user SET status = 'defending' WHERE id = '${statsID}'`;
-// 					con.query(sql, console.log);
-// 					eTurn();
-//                 		return;
-//             		} else if (message.content == `${prefix}skill yeet`) {
-//                			if(skills.indexOf("yeet") != -1){
-// 					if(statusE == "defending"){
-// 					sql = `UPDATE user SET hp = ${hp - 40} WHERE id = 'ENEMY'`;
-// 					con.query(sql, console.log);
-// 					eTurn();
-// 					} else {
-// 					sql = `UPDATE user SET hp = ${hp - 40} WHERE id = 'ENEMY'`;
-// 					con.query(sql, console.log);
-// 					eTurn();
-// 					}
-// 				}	
-//                 		return;
-//             		} else if (message.content == `${prefix}item`) {
-//                		marksman();
-//                 		return;
-//             		} else if (message.content == `${prefix}flee`) {
-//                		marksman();
-//                 		return;
-//             		}
-// 				else {
-// 				message.author.send("Not a valid response!");		
-// 			}
-// 			});
-// 				});	
-// 			});
-// 	}
+			sql3 = `UPDATE user SET hp = ${hp + 10} WHERE id = '${message.author.id}'`;
+			con.query(sql3);
+				message.author.send("HP increased!");
+			goMoney();			
+                		return;
+            		} else if (message.content == `${prefix}atk`) {
+               		
+			sql3 = `UPDATE user SET atk = ${atk + 1} WHERE id = '${message.author.id}'`;
+			con.query(sql3);	
+				message.author.send("ATK increased!");
+			goMoney();			
+                		return;
+            		} else if (message.content == `${prefix}def`) {
+               		
+			sql3 = `UPDATE user SET def = ${def + 1} WHERE id = '${message.author.id}'`;
+			con.query(sql3);	
+				message.author.send("DEF increased!");
+			goMoney();			
+                		return;
+            		} else if (message.content == `${prefix}matk`) {
+               		
+			sql3 = `UPDATE user SET mAtk = ${mAtk + 1} WHERE id = '${message.author.id}'`;
+			con.query(sql3);
+				message.author.send("MATK increased!");
+			goMoney();			
+                		return;
+            		} else if (message.content == `${prefix}mdef`) {
+               		
+			sql3 = `UPDATE user SET mDef = ${mDef + 1} WHERE id = '${message.author.id}'`;
+			con.query(sql3);	
+				message.author.send("MDEF increased!");
+			goMoney();			
+                		return;
+            		} else if (message.content == `${prefix}spd`) {
+               		
+			sql3 = `UPDATE user SET spd = ${spd + 1} WHERE id = '${message.author.id}'`;
+			con.query(sql3);
+				message.author.send("spd increased!");
+			goMoney();			
+                		return;
+            		} else {
+			sql3 = `UPDATE user SET hp = ${hp + 10} WHERE id = '${message.author.id}'`;
+			con.query(sql3);
+				message.author.send("HP increased!");
+			goMoney();	
+			}	
+				});
+			}
+			
+ 			if(cap > lvlUP){
+			sql = `UPDATE user SET lvl = ${cap - lvlUP} WHERE id = '${statsID}'`;
+			con.query(sql);	
+			sql2 = `UPDATE user SET lvl = ${lvl + 1} WHERE id = '${message.author.id}'`;
+			con.query(sql2);
+				allocate()
+			} else {
+				goMoney();
+			}	
+			
+			
+		}
+		});
+		});
+		}
+		});		
+	}
 	
-// 	function fight(){
-// 		let statsID = 'ST' + message.author.id;
-// 			con.query(`SELECT * FROM user WHERE id = '${statsID}'`, (err, rows) => {
-// 			if(err) throw err;
-// 			let spd = rows[0].spd;
-// 			let turn = rows[0].turn;	
+	
+	function battle(){
+		let statsID = 'ST' + message.author.id;
+	function eTurn(){
+		
+			con.query(`SELECT * FROM user WHERE id = 'ENEMY'`, (err, rows) => {
+			if(err) throw err;
+		let status = rows[0].status;
+		let hp = rows[0].hp;
+		let atk = rows[0].atk;
+		let def = rows[0].def;
+		let mAtk = rows[0].mAtk;
+		let mDef = rows[0].mDef;
+		let spd = rows[0].spd;	
+		let turn = rows[0].turn;
+		let mon = rows[0].class	
+		var roll = Math.floor(Math.random() * 6) + 1;	
+		
+				con.query(`SELECT * FROM user WHERE id = '${statsID}'`, (err, rows) => {
+				if(err) throw err;
+				let sql;
+				let statusE = rows[0].status;
+				let hpE = rows[0].hp;
+				let defE = rows[0].def;
+				var dmg = (atk * roll);
+				var ddmg =  dmg - defE;	
+				var chance = Math.floor(Math.random() * 10) + 1;
+				if(hp > 0) {	
+					if(chance > 3){
+						if(statusE == "defending"){
+						sql = `UPDATE user SET status = '', hp = ${hp - ddmg} WHERE id = '${statsID}'`;
+						con.query(sql, console.log);
+						message.author.send("You took **" + ddmg + "** damage!");
+						battle();
+						} else {
+						sql = `UPDATE user SET hp = ${hp - dmg} WHERE id = '${statsID}'`;
+						con.query(sql, console.log);
+						message.author.send("You took **" + dmg + "** damage!");
+						battle();
+						}
+					}	
+						 else {
+							sql = `UPDATE user SET status = 'defending' WHERE id = 'ENEMY'`;
+							con.query(sql, console.log);
+							message.author.send("The " + mon + " raised its defenses!");
+							battle();
+						}
+				}	else {
+					message.author.send("You won!")
+					goExp();
+				}
+					});
+					});
 				
-// 		con.query(`SELECT * FROM user WHERE id = 'ENEMY'`, (err, rows) => {
-// 		if(err) throw err;
-// 		let type = rows[0].class;
-// 		let eSpd = rows[0].spd;	
-			
-// 			if(type == "Slime" && turn < 2 ){
-// 			   const booru = new Danbooru()
-// 		booru.posts({ tags: 'slime rating:safe', random: true }).then(posts => {
-//  		 // Select a random post from posts array
-//   		const index = Math.floor(Math.random() * posts.length)
-//   		const post = posts[index]
- 
-//   		// Get post's url 
-//  		 const url = booru.url(post.file_url)
- 			
-// 		let slime1 = new Discord.RichEmbed()
-
-// 			.setTitle("A slime has appeared!")
-// 			.setImage(url.href)
-// 			.setColor("#407f3b");
-
-// 		message.author.sendEmbed(slime1);\
-// 		if(spd >= eSpd){	
-//  		battle();
-// 		} else {
-// 		message.author.send("The " + type + " has the first move!");		
-// 		 slime();
-// 		}	
-//   		 })
-// 			} else if(type == "Dragon" && turn < 2 ){
-// 			   const booru = new Danbooru()
-// 		booru.posts({ tags: 'dragon rating:safe', random: true }).then(posts => {
-//  		 // Select a random post from posts array
-//   		const index = Math.floor(Math.random() * posts.length)
-//   		const post = posts[index]
- 
-//   		// Get post's url 
-//  		 const url = booru.url(post.file_url)
- 			
-// 		let dragon1 = new Discord.RichEmbed()
-
-// 			.setTitle("A dragon has appeared!")
-// 			.setImage(url.href)
-// 			.setColor("#407f3b");
-
-// 		message.author.sendEmbed(dragon1);
-//  		if(spd >= eSpd){	
-//  		battle();
-// 		} else {
-// 		message.author.send("The " + type + " has the first move!");	
-// 		 dragon();
-// 		}	
-//   		 })
-// 			}  else if(type == "Demon" && turn < 2 ) {
-// 			   const booru = new Danbooru()
-// 		booru.posts({ tags: 'demon rating:safe', random: true }).then(posts => {
-//  		 // Select a random post from posts array
-//   		const index = Math.floor(Math.random() * posts.length)
-//   		const post = posts[index]
- 
-//   		// Get post's url 
-//  		 const url = booru.url(post.file_url)
- 			
-// 		let demon1 = new Discord.RichEmbed()
-
-// 			.setTitle("A demon has appeared!")
-// 			.setImage(url.href)
-// 			.setColor("#407f3b");
-
-// 		message.author.sendEmbed(demon1);
-//  		if(spd >= eSpd){	
-//  		battle();
-// 		} else {
-// 		message.author.send("The " + type + " has the first move!");	
-// 		 demon();
-// 		}	
-//   		 })
-			
-// 			} 
-			
-// 		});
-// 				});
-// 	}
-	
-// 	function enemy(){
-// 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-// 		if(err) throw err;
-// 		let location = rows[0].location;
-			
+	}
 		
-// 				con.query(`SELECT * FROM user WHERE id = 'ENEMY'`, (err, rows) => {
-// 				if(err) throw err;
-// 				let sql;
+			con.query(`SELECT * FROM user WHERE id = '${statsID}'`, (err, rows) => {
+			if(err) throw err;
+		let status = rows[0].status;
+		let skills = rows[0].inventory;
+		let hp = rows[0].hp;
+		let atk = rows[0].atk;
+		let def = rows[0].def;
+		let mAtk = rows[0].mAtk;
+		let mDef = rows[0].mDef;
+		let spd = rows[0].spd;	
+		let turn = rows[0].turn;	
+		var roll = Math.floor(Math.random() * 6) + 1;	
+		
+				con.query(`SELECT * FROM user WHERE id = 'ENEMY'`, (err, rows) => {
+				if(err) throw err;
+				let sql;
+				let statusE = rows[0].status;
+				let hpE = rows[0].hp;
+				let defE = rows[0].def;
+				var dmg = (atk * roll);
+				var ddmg =  dmg - defE;	
+				let mon = rows[0].class
+				let Espd = rows[0].spd;	
+				
+				if(Espd > spd && turn == 1){
+					eTurn();
+				} else {
+					turn();
+				}	
 					
-// 				if(rows.length < 1) {
-// 					if(location == "Forest"){
-// 						var enem = Math.floor(Math.random() * 10) + 1;
-// 						if(enem < 2){
-// 							var eLvl = Math.floor(Math.random() * 5) + 1;
-// 							var eHP = 200 + (eLvl * 10);
-// 							var eAtk = 10 + eLvl;
-// 							var eDef = 8 + eLvl;
-// 							var emAtk = 10 + eLvl;
-// 							var emDef = 8 + eLvl;
-// 							var eSpd = 5 + eLvl;
-// 							var cost =  eLvl * Math.floor(Math.random() * 99) + 1;
-// 						sql = `INSERT INTO user (id, class, hp, atk, def, matk, mdef, spd, money, lvl, turn) VALUES ('ENEMY', 'Dragon', ${eHP}, ${eAtk}, ${eDef}, ${emAtk}, ${emDef}, ${eSpd}, ${eLvl}, ${cost}, ${1})`;
-// 						con.query(sql, console.log);
-// 						fight();
-// 						} else if(enem > 3 && enem < 10){
-// 							var eLvl = Math.floor(Math.random() * 3) + 1;
-// 							var eHP = 100 + (eLvl * 10);
-// 							var eAtk = 5 + eLvl;
-// 							var eDef = 3 + eLvl;
-// 							var emAtk = 5 + eLvl;
-// 							var emDef = 3 + eLvl;
-// 							var eSpd = 3 + eLvl;
-// 							var cost =  eLvl * Math.floor(Math.random() * 999) + 1
-// 						sql = `INSERT INTO user (id, class, hp, atk, def, matk, mdef, spd, money, lvl, turn) VALUES ('ENEMY', 'Slime', ${eHP}, ${eAtk}, ${eDef}, ${emAtk}, ${emDef}, ${eSpd}, ${eLvl}, ${cost}, ${1})`;
-// 						con.query(sql, console.log);
-// 						fight();
-// 						} else {
-// 							var eLvl = Math.floor(Math.random() * 10) + 1;
-// 							var eHP = 400 + (eLvl * 10);
-// 							var eAtk = 20 + eLvl;
-// 							var eDef = 15 + eLvl;
-// 							var emAtk = 20 + eLvl;
-// 							var emDef = 15 + eLvl;
-// 							var eSpd = 10 + eLvl;
-// 							var cost =  eLvl * Math.floor(Math.random() * 9999) + 1
-// 						sql = `INSERT INTO user (id, class, hp, atk, def, matk, mdef, spd, money, lvl, turn) VALUES ('ENEMY', 'Demon', ${eHP}, ${eAtk}, ${eDef}, ${emAtk}, ${emDef}, ${eSpd}, ${eLvl}, ${cost}, ${1})`;
-// 						con.query(sql, console.log);
-// 						fight();
-// 						}
-// 					}	
-// 					else {
-// 						message.author.send("Location not found.");
-// 						return;
-// 					}
-// 				}	
-					
-// 					else {
-// 					message.author.send("Cannot create enemy");
-// 						return;
-// 				}
-// 				});	
-// 			return;
-// 				});
-// 	}
-	
-// 	function goBattle(){
-// 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-// 		if(err) throw err;
-// 		let sql;
-// 		let status = rows[0].status;
-// 		let clas = rows[0].class;	
-// 		let hp = rows[0].hp;
-// 		let atk = rows[0].atk;
-// 		let def = rows[0].def;
-// 		let mAtk = rows[0].mAtk;
-// 		let mDef = rows[0].mDef;
-// 		let spd = rows[0].spd;
-		
-		
-		
-// 		if(rows.length < 1) {
-			
-// 			message.author.send(" create a KSRPG account with `>user`!");
-			
-// 		}	else {
-// 					let statsID = 'ST' + message.author.id;
-// 					con.query(`SELECT * FROM user WHERE id = '${statsID}'`, (err, rows) => {
-// 					if(err) throw err;
-// 					let sql;
-					
-// 					if(rows.length < 1) {
-// 						if(clas == "mortal"){
-// 						sql = `INSERT INTO user (id, inventory, status, hp, atk, def, matk, mdef, spd, lvl, turn) VALUES ('${statsID}', 'yeet',  '', ${hp}, ${atk}, ${def}, ${mAtk}, ${mDef}, ${spd}, ${0}, ${1}, ${1})`;
-// 						con.query(sql, console.log);
-// 						enemy();
-// 						return;
-// 						} else if(clas == "mage"){
-// 						sql = `INSERT INTO user (id, inventory, status, hp, atk, def, matk, mdef, spd, lvl, turn) VALUES ('${statsID}', 'beam',  '', ${hp}, ${atk}, ${def}, ${mAtk}, ${mDef}, ${spd}, ${0}, ${1}, ${1})`;
-// 						con.query(sql, console.log);
-// 						enemy();
-// 						return;
-// 						} else if(clas == "martial artist"){
-// 						sql = `INSERT INTO user (id, inventory, status, hp, atk, def, matk, mdef, spd, lvl, turn) VALUES ('${statsID}', 'kick',  '', ${hp}, ${atk}, ${def}, ${mAtk}, ${mDef}, ${spd}, ${0}, ${1}, ${1})`;
-// 						con.query(sql, console.log);
-// 						enemy();
-// 						return;
-// 						} else {
-// 						sql = `INSERT INTO user (id, inventory, status, hp, atk, def, matk, mdef, spd, lvl, turn) VALUES ('${statsID}', 'shot',  '', ${hp}, ${atk}, ${def}, ${mAtk}, ${mDef}, ${spd}, ${0}, ${1}, ${1})`;
-// 						con.query(sql, console.log);
-// 						enemy();
-// 						return;
-// 						}
-// 					}	else {
+								function turn(){	
+				if(hp > 0){
+				
+				message.author.send("HP: **" + hp + "\n Skills: **" + skills + "** \n" + "** \n Turn: **" + turn + "** \n " + "What will you do? \n >fight \n >defend \n >skill \n >flee");
+				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+        		collector.once('collect', message => {
+            		if (message.content == `${prefix}fight`) {
+               		
+					if(statusE == "defending"){
+					sql = `UPDATE user SET status = '', hp = ${hp - ddmg}, turn = ${turn + 1} WHERE id = 'ENEMY'`;
+					con.query(sql, console.log);
+					message.author.send("The " + mon + " took **" + ddmg + "** damage!");
+					eTurn();
+					} else {
+					sql = `UPDATE user SET hp = ${hp - dmg}, turn = ${turn + 1}  WHERE id = 'ENEMY'`;
+					con.query(sql, console.log);
+					message.author.send("The " + mon + " took **" + dmg + "** damage!");
+					eTurn();
+					}
 						
-// 						sql = `UPDATE user SET status = '', hp = ${hp}, atk = ${atk}, def = ${def}, mAtk = ${mAtk} turn = ${1}, mDef = ${mDef}, spd = ${spd}, turn = ${1} WHERE id = '${statsID}'`;
-// 						con.query(sql, console.log);
-// 						enemy();
-// 					}
+                		return;
+            		} else if (message.content == `${prefix}defend`) {
+               				sql = `UPDATE user SET status = 'defending', turn = ${turn + 1}  WHERE id = '${statsID}'`;
+					con.query(sql, console.log);
+					message.author.send("You raised your defenses!");
+					eTurn();
+                		return;
+            		} else if (message.content == `${prefix}skill`) {
+               			if(skills.indexOf("yeet") != -1){
+					if(statusE == "defending"){
+					sql = `UPDATE user SET hp = ${hp - 40}, turn = ${turn + 1}  WHERE id = 'ENEMY'`;
+					con.query(sql, console.log);
+					message.author.send("You YEETED the " + mon + "!");
+					message.author.send("The " + mon + " took **40** damage!");
+					eTurn();
+					} else {
+					sql = `UPDATE user SET hp = ${hp - 40}, turn = ${turn + 1}  WHERE id = 'ENEMY'`;	
+					con.query(sql, console.log);
+					message.author.send("You YEETED the " + mon + "!");
+					message.author.send("The " + mon + " took **40** damage!");
+					eTurn();
+					}
+				}	
+                		return;
+            		} else if (message.content == `${prefix}flee`) {
+               		var flee = Math.floor(Math.random() * 6) + 1;
+			if(flee > 2){
+				message.author.send("Got away safely");
+				progress();
+                		return;
+            		} else {
+				message.author.send("Couldn't get away...");
+				eTurn();
+			}
+			}
+				
+				else {
+				message.author.send("Not a valid response!");
+				eturn();	
+			}
+			});
+			} else {
+				goLose();       
+			}	
 			
-// 				return;
-// 		}
-// 			});	
+				}		
+				});	
+						
+					
+				
+			});
+	}
 	
-// 	}	
+	function fight(){
+		let statsID = 'ST' + message.author.id;
+			con.query(`SELECT * FROM user WHERE id = '${statsID}'`, (err, rows) => {
+			if(err) throw err;
+			let spd = rows[0].spd;
+			let turn = rows[0].turn;	
+				
+		con.query(`SELECT * FROM user WHERE id = 'ENEMY'`, (err, rows) => {
+		if(err) throw err;
+		let type = rows[0].class;
+		let eSpd = rows[0].spd;	
+			
+			if(type == "Slime" && turn < 2 ){
+			   const booru = new Danbooru()
+		booru.posts({ tags: 'slime rating:safe', random: true }).then(posts => {
+ 		 // Select a random post from posts array
+  		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
+ 
+  		// Get post's url 
+ 		 const url = booru.url(post.file_url)
+ 			
+		let slime1 = new Discord.RichEmbed()
+
+			.setTitle("A slime has appeared!")
+			.setImage(url.href)
+			.setColor("#407f3b");
+
+		message.author.sendEmbed(slime1);
+		battle();
+  		 })
+			} else if(type == "Dragon" && turn < 2 ){
+			   const booru = new Danbooru()
+		booru.posts({ tags: 'dragon rating:safe', random: true }).then(posts => {
+ 		 // Select a random post from posts array
+  		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
+ 
+  		// Get post's url 
+ 		 const url = booru.url(post.file_url)
+ 			
+		let dragon1 = new Discord.RichEmbed()
+
+			.setTitle("A dragon has appeared!")
+			.setImage(url.href)
+			.setColor("#407f3b");
+
+		message.author.sendEmbed(dragon1);
+ 		battle();
+  		 })
+			}  else if(type == "Demon" && turn < 2 ) {
+			   const booru = new Danbooru()
+		booru.posts({ tags: 'demon rating:safe', random: true }).then(posts => {
+ 		 // Select a random post from posts array
+  		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
+ 
+  		// Get post's url 
+ 		 const url = booru.url(post.file_url)
+ 			
+		let demon1 = new Discord.RichEmbed()
+
+			.setTitle("A demon has appeared!")
+			.setImage(url.href)
+			.setColor("#407f3b");
+
+		message.author.sendEmbed(demon1);
+ 		battle();
+  		 })
+			
+			} 
+			
+		});
+				});
+	}
+	
+	function enemy(){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let location = rows[0].location;
+			
+		
+				con.query(`SELECT * FROM user WHERE id = 'ENEMY'`, (err, rows) => {
+				if(err) throw err;
+				let sql;
+					
+				if(rows.length < 1) {
+					if(location == "Forest"){
+						var enem = Math.floor(Math.random() * 10) + 1;
+						if(enem < 2){
+							var eLvl = Math.floor(Math.random() * 5) + 1;
+							var eHP = 200 + (eLvl * 10);
+							var eAtk = 10 + eLvl;
+							var eDef = 8 + eLvl;
+							var emAtk = 10 + eLvl;
+							var emDef = 8 + eLvl;
+							var eSpd = 5 + eLvl;
+							var cost =  eLvl * Math.floor(Math.random() * 99) + 1;
+						sql = `INSERT INTO user (id, class, hp, atk, def, matk, mdef, spd, money, lvl, turn) VALUES ('ENEMY', 'Dragon', ${eHP}, ${eAtk}, ${eDef}, ${emAtk}, ${emDef}, ${eSpd}, ${eLvl}, ${cost}, ${1})`;
+						con.query(sql, console.log);
+						fight();
+						} else if(enem > 3 && enem < 10){
+							var eLvl = Math.floor(Math.random() * 3) + 1;
+							var eHP = 100 + (eLvl * 10);
+							var eAtk = 5 + eLvl;
+							var eDef = 3 + eLvl;
+							var emAtk = 5 + eLvl;
+							var emDef = 3 + eLvl;
+							var eSpd = 3 + eLvl;
+							var cost =  eLvl * Math.floor(Math.random() * 999) + 1
+						sql = `INSERT INTO user (id, class, hp, atk, def, matk, mdef, spd, money, lvl, turn) VALUES ('ENEMY', 'Slime', ${eHP}, ${eAtk}, ${eDef}, ${emAtk}, ${emDef}, ${eSpd}, ${eLvl}, ${cost}, ${1})`;
+						con.query(sql, console.log);
+						fight();
+						} else {
+							var eLvl = Math.floor(Math.random() * 10) + 1;
+							var eHP = 400 + (eLvl * 10);
+							var eAtk = 20 + eLvl;
+							var eDef = 15 + eLvl;
+							var emAtk = 20 + eLvl;
+							var emDef = 15 + eLvl;
+							var eSpd = 10 + eLvl;
+							var cost =  eLvl * Math.floor(Math.random() * 9999) + 1
+						sql = `INSERT INTO user (id, class, hp, atk, def, matk, mdef, spd, money, lvl, turn) VALUES ('ENEMY', 'Demon', ${eHP}, ${eAtk}, ${eDef}, ${emAtk}, ${emDef}, ${eSpd}, ${eLvl}, ${cost}, ${1})`;
+						con.query(sql, console.log);
+						fight();
+						}
+					}	
+					else {
+						message.author.send("Location not found.");
+						return;
+					}
+				}	
+					
+					else {
+					message.author.send("Cannot create enemy");
+						return;
+				}
+				});	
+			return;
+				});
+	}
+	
+	function goBattle(){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let status = rows[0].status;
+		let clas = rows[0].class;	
+		let hp = rows[0].hp;
+		let atk = rows[0].atk;
+		let def = rows[0].def;
+		let mAtk = rows[0].mAtk;
+		let mDef = rows[0].mDef;
+		let spd = rows[0].spd;
+		
+		
+		
+		if(rows.length < 1) {
+			
+			message.author.send(" create a KSRPG account with `>user`!");
+			
+		}	else {
+					let statsID = 'ST' + message.author.id;
+					con.query(`SELECT * FROM user WHERE id = '${statsID}'`, (err, rows) => {
+					if(err) throw err;
+					let sql;
+					
+					if(rows.length < 1) {
+						if(clas == "mortal"){
+						sql = `INSERT INTO user (id, inventory, status, hp, atk, def, matk, mdef, spd, lvl, turn) VALUES ('${statsID}', 'yeet',  '', ${hp}, ${atk}, ${def}, ${mAtk}, ${mDef}, ${spd}, ${0}, ${1})`;
+						con.query(sql, console.log);
+						enemy();
+						return;
+						} else if(clas == "mage"){
+						sql = `INSERT INTO user (id, inventory, status, hp, atk, def, matk, mdef, spd, lvl, turn) VALUES ('${statsID}', 'beam',  '', ${hp}, ${atk}, ${def}, ${mAtk}, ${mDef}, ${spd}, ${0}, ${1})`;
+						con.query(sql, console.log);
+						enemy();
+						return;
+						} else if(clas == "martial artist"){
+						sql = `INSERT INTO user (id, inventory, status, hp, atk, def, matk, mdef, spd, lvl, turn) VALUES ('${statsID}', 'kick',  '', ${hp}, ${atk}, ${def}, ${mAtk}, ${mDef}, ${spd}, ${0}, ${1})`;
+						con.query(sql, console.log);
+						enemy();
+						return;
+						} else {
+						sql = `INSERT INTO user (id, inventory, status, hp, atk, def, matk, mdef, spd, lvl, turn) VALUES ('${statsID}', 'shot',  '', ${hp}, ${atk}, ${def}, ${mAtk}, ${mDef}, ${spd}, ${0}, ${1})`;
+						con.query(sql, console.log);
+						enemy();
+						return;
+						}
+					}	else {
+						
+						sql = `UPDATE user SET status = '', atk = ${atk}, def = ${def}, mAtk = ${mAtk} turn = ${1}, mDef = ${mDef}, spd = ${spd}, turn = ${1} WHERE id = '${statsID}'`;
+						con.query(sql, console.log);
+						enemy();
+					}
+			
+				return;
+		});
+		
+			}
+			
+			});
+	
+	}	
+			
+	if(command === `${prefix}go`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let location = rows[0].location;
+		if(rows.length < 1) {
+			
+			
+			message.author.send("Create an KSRPG account with `>user`!");
+			
+		}	else {
+			
+			if(location == "Forest"){
+		var chance = Math.floor(Math.random() * 10) + 1;
+		if(chance > 3){
+			goBattle();
+		} else if(chance < 3){
+			progress();
+		} else {
+			goFunds();
+		}
+		} else {
+			message.author.send("Start a quest with `>search Forest`!");
+			return;
+		}
+		 return; 
+		}
+			});
+		
+		
+
+		
+
+		
+
+	}	
+			
+	if(command === `${prefix}leave`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		if(rows.length < 1) {
+			
+		message.author.send("You don't have a journey to end!");
+			return;
+		}	else {
+
+	
+			
+ 			sql = `UPDATE user SET location = '', turn = ${1} WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);
+			message.author.send("Journey ended!");
+			
+			return;
+			
+			
+		}
+			});
+	}
+		
+	if(command === `${prefix}search forest`){
+		searchForest();
+	}
+			  
+			  
 	
 	if(message.channel.type === "dm") return;
 	
@@ -840,8 +1152,8 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 		let help = new Discord.RichEmbed()
 
 			
-			.setTitle("Patch Notes 1/24/29")
-			.setDescription("-Adding stuff now so this bot can be badass :sunglasses: \n - Can view users and self.")
+			.setTitle("Patch Notes 1/29/29")
+			.setDescription("-TESTING RPG FUNCTIONALITIES")
 			.setColor("#ff9a0c"); 
 
 		message.channel.send(help);
