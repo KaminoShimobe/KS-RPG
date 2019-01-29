@@ -673,7 +673,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 		
 			con.query(`SELECT * FROM user WHERE id = 'ENEMY'`, (err, rows) => {
 			if(err) throw err;
-		let status = rows[0].status;
+		let status2 = rows[0].status;
 		let hp2 = rows[0].hp;
 		let atk2 = rows[0].atk;
 		let def2 = rows[0].def;
