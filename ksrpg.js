@@ -810,7 +810,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 				
 				else {
 				message.author.send("Not a valid response!");
-				eturn();	
+				eTurn();	
 			}
 			});
 			} else {
@@ -926,6 +926,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 						sql = `INSERT INTO user (id, class, hp, atk, def, matk, mdef, spd, money, lvl, turn) VALUES ('ENEMY', 'Dragon', ${eHP}, ${eAtk}, ${eDef}, ${emAtk}, ${emDef}, ${eSpd}, ${eLvl}, ${cost}, ${1})`;
 						con.query(sql, console.log);
 						fight();
+							return;
 						} else if(enem > 3 && enem < 10){
 							var eLvl = Math.floor(Math.random() * 3) + 1;
 							var eHP = 100 + (eLvl * 10);
@@ -938,6 +939,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 						sql = `INSERT INTO user (id, class, hp, atk, def, matk, mdef, spd, money, lvl, turn) VALUES ('ENEMY', 'Slime', ${eHP}, ${eAtk}, ${eDef}, ${emAtk}, ${emDef}, ${eSpd}, ${eLvl}, ${cost}, ${1})`;
 						con.query(sql, console.log);
 						fight();
+							return;
 						} else {
 							var eLvl = Math.floor(Math.random() * 10) + 1;
 							var eHP = 400 + (eLvl * 10);
@@ -950,6 +952,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 						sql = `INSERT INTO user (id, class, hp, atk, def, matk, mdef, spd, money, lvl, turn) VALUES ('ENEMY', 'Demon', ${eHP}, ${eAtk}, ${eDef}, ${emAtk}, ${emDef}, ${eSpd}, ${eLvl}, ${cost}, ${1})`;
 						con.query(sql, console.log);
 						fight();
+							return;
 						}
 					}	
 					else {
