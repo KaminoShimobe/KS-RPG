@@ -416,7 +416,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 
  			sql = `UPDATE user SET location = 'Forest', turn = ${1} WHERE id = '${message.author.id}'`;
 			con.query(sql, console.log);
-			message.author.send("Welcome to the forest! Type `!go` to progress to the next floor!");
+			message.author.send("Welcome to the forest! Type `>go` to progress to the next floor!");
 			
 			
 		}
@@ -1090,7 +1090,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 			});
 	}
 		
-	if(command === `${prefix}search forest`){
+	if(command === `${prefix}search` && messageArray[1] == "Forest"){
 		searchForest();
 	}
 			  
