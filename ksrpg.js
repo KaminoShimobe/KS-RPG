@@ -962,7 +962,9 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 				}	
 					
 					else {
-					message.author.send("Cannot create enemy");
+					sql = `DELETE FROM user WHERE id = 'ENEMY'`;
+					con.query(sql, console.log);
+						enemy();
 						return;
 				}
 				});	
