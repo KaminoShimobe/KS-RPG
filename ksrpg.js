@@ -686,7 +686,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 		
 				con.query(`SELECT * FROM user WHERE id = '${statsID}'`, (err, rows) => {
 				if(err) throw err;
-				let sql;
+				let sql2;
 				let statusE2 = rows[0].status;
 				let hpE2 = rows[0].hp;
 				let defE2 = rows[0].def;
@@ -696,20 +696,20 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 				if(hp > 0) {	
 					if(chance > 3){
 						if(statusE2 == "defending"){
-						sql = `UPDATE user SET status = '', hp = ${hp2 - ddmg2} WHERE id = '${statsID}'`;
-						con.query(sql, console.log);
+						sql2 = `UPDATE user SET status = '', hp = ${hp2 - ddmg2} WHERE id = '${statsID}'`;
+						con.query(sql2, console.log);
 						message.author.send("You took **" + ddmg2 + "** damage!");
 						battle();
 						} else {
-						sql = `UPDATE user SET hp = ${hp2 - dmg2} WHERE id = '${statsID}'`;
-						con.query(sql, console.log);
+						sql2 = `UPDATE user SET hp = ${hp2 - dmg2} WHERE id = '${statsID}'`;
+						con.query(sql2, console.log);
 						message.author.send("You took **" + dmg2 + "** damage!");
 						battle();
 						}
 					}	
 						 else {
-							sql = `UPDATE user SET status = 'defending' WHERE id = 'ENEMY'`;
-							con.query(sql, console.log);
+							sql2 = `UPDATE user SET status = 'defending' WHERE id = 'ENEMY'`;
+							con.query(sql2, console.log);
 							message.author.send("The " + mon2 + " raised its defenses!");
 							battle();
 						}
@@ -965,7 +965,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 					sql = `DELETE FROM user WHERE id = 'ENEMY'`;
 					con.query(sql, console.log);
 						enemy();
-						return;
+						
 				}
 				});	
 			return;
