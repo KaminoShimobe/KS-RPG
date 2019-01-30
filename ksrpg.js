@@ -746,13 +746,9 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 				let mon = rows[0].class
 				let Espd = rows[0].spd;	
 				
-				if(Espd > spd && cturn == 1){
-					eTurn();
-				} else {
-					turn();
-				}	
+				
 					
-								function turn(){	
+								function pturn(){	
 				if(hp > 0){
 				console.log(hp);
 				console.log(hpE);	
@@ -818,6 +814,12 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 				goLose();       
 			}	
 			
+				}	
+					
+				if(Espd > spd && cturn == 1){
+					eTurn();
+				} else {
+					pturn();
 				}		
 				});	
 						
