@@ -558,11 +558,11 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 		} else{
 			var exp;
 			if(monster == "Slime"){
-				exp = Elvl * Math.floor(Math.random() * 5) + 1;
-			} else if(monster == "Dragon"){
 				exp = Elvl * Math.floor(Math.random() * 10) + 1;
+			} else if(monster == "Dragon"){
+				exp = Elvl * Math.floor(Math.random() * 25) + 1;
 			} else {
-				exp = Elvl * Math.floor(Math.random() * 20) + 1;
+				exp = Elvl * Math.floor(Math.random() * 50) + 1;
 			}	
 		let statsID = 'ST' + message.author.id;
 		con.query(`SELECT * FROM user WHERE id = '${statsID}'`, (err, rows) => {
@@ -696,12 +696,12 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 				if(hp2 > 0) {	
 					if(chance > 3){
 						if(statusE2 == "defending"){
-						sql2 = `UPDATE user SET status = '', hp = ${hp2 - ddmg2}, turn = ${turn2 + 1} WHERE id = '${statsID}'`;
+						sql2 = `UPDATE user SET status = '', hp = ${hpE2 - ddmg2}, turn = ${turn2 + 1} WHERE id = '${statsID}'`;
 						con.query(sql2, console.log);
 						message.author.send("You took **" + ddmg2 + "** damage!");
 						battle();
 						} else {
-						sql2 = `UPDATE user SET hp = ${hp2 - dmg2}, turn = ${turn2 + 1} WHERE id = '${statsID}'`;
+						sql2 = `UPDATE user SET hp = ${hpE2 - dmg2}, turn = ${turn2 + 1} WHERE id = '${statsID}'`;
 						con.query(sql2, console.log);
 						message.author.send("You took **" + dmg2 + "** damage!");
 						battle();
@@ -758,12 +758,12 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
             		if (message.content == `${prefix}fight`) {
                		
 					if(statusE == "defending"){
-					sql = `UPDATE user SET status = '', hp = ${hp - ddmg}, turn = ${cturn + 1} WHERE id = 'ENEMY'`;
+					sql = `UPDATE user SET status = '', hp = ${hpE - ddmg}, turn = ${cturn + 1} WHERE id = 'ENEMY'`;
 					con.query(sql, console.log);
 					message.author.send("The " + mon + " took **" + ddmg + "** damage!");
 					eTurn();
 					} else {
-					sql = `UPDATE user SET hp = ${hp - dmg}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
+					sql = `UPDATE user SET hp = ${hpE - dmg}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
 					con.query(sql, console.log);
 					message.author.send("The " + mon + " took **" + dmg + "** damage!");
 					eTurn();
@@ -925,7 +925,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 							var emAtk = 10 + eLvl;
 							var emDef = 8 + eLvl;
 							var eSpd = 5 + eLvl;
-							var cost =  eLvl * Math.floor(Math.random() * 99) + 1;
+							var cost =  eLvl * Math.floor(Math.random() * 999) + 1;
 						sql = `INSERT INTO user (id, class, hp, atk, def, matk, mdef, spd, money, lvl, turn) VALUES ('ENEMY', 'Dragon', ${eHP}, ${eAtk}, ${eDef}, ${emAtk}, ${emDef}, ${eSpd}, ${eLvl}, ${cost}, ${1})`;
 						con.query(sql, console.log);
 						fight();
@@ -938,7 +938,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 							var emAtk = 5 + eLvl;
 							var emDef = 3 + eLvl;
 							var eSpd = 3 + eLvl;
-							var cost =  eLvl * Math.floor(Math.random() * 999) + 1
+							var cost =  eLvl * Math.floor(Math.random() * 99) + 1
 						sql = `INSERT INTO user (id, class, hp, atk, def, matk, mdef, spd, money, lvl, turn) VALUES ('ENEMY', 'Slime', ${eHP}, ${eAtk}, ${eDef}, ${emAtk}, ${emDef}, ${eSpd}, ${eLvl}, ${cost}, ${1})`;
 						con.query(sql, console.log);
 						fight();
