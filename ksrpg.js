@@ -562,11 +562,11 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 		} else{
 			var exp;
 			if(monster == "Slime"){
-				exp = Elvl * Math.floor(Math.random() * 10) + 1;
-			} else if(monster == "Dragon"){
 				exp = Elvl * Math.floor(Math.random() * 25) + 1;
-			} else {
+			} else if(monster == "Dragon"){
 				exp = Elvl * Math.floor(Math.random() * 50) + 1;
+			} else {
+				exp = Elvl * Math.floor(Math.random() * 100) + 1;
 			}	
 		let statsID = 'ST' + message.author.id;
 		con.query(`SELECT * FROM user WHERE id = '${statsID}'`, (err, rows) => {
@@ -1257,7 +1257,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 
 			
 			.setTitle("Patch Notes 1/30/29")
-			.setDescription("->view SHOULD show you how much until your next level \n -Wait a bit before sending too many messages. You may get bodied.\n-battles tell you when the monster goes first \n -Can now do >skill to use your skill! \n -**KSRPG IS LIVE** \n -There is no limit to the current dungeon the forest, but rewards increase the deeper you go.\n -Working on a shop to purchase items \n -More levels coming hopefully later today, with a boss")
+			.setDescription("-Buffed exp gain \n - You can now see your level progress \n -Wait a bit before sending too many messages. You may get bodied.\n-battles tell you when the monster goes first \n -Can now do >skill to use your skill! \n -**KSRPG IS LIVE** \n -There is no limit to the current dungeon the forest, but rewards increase the deeper you go.\n -Working on a shop to purchase items \n -More levels coming hopefully later today, with a boss")
 			.setColor("#ff9a0c"); 
 
 		message.channel.send(help);
