@@ -831,14 +831,16 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 				}
 
 				if(skills.indexOf("shot") != -1){
+					var shot = ddmg + mddmg;
+					var shot2 = dmg + mdmg
 					if(statusE == "defending"){
-					sql = `UPDATE user SET hp = ${hpE - (ddmg + mddmg)}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
+					sql = `UPDATE user SET hp = ${hpE - shot}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
 					con.query(sql, console.log);
 					message.author.send("You shot at the " + mon + " with a gun!");
 					message.author.send("The " + mon + " took **" + (ddmg + mddmg) + "** damage!");
 					eTurn();
 					} else {
-					sql = `UPDATE user SET hp = ${hpE - (dmg + mdmg)}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;	
+					sql = `UPDATE user SET hp = ${hpE - shot2}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;	
 					con.query(sql, console.log);
 					message.author.send("You shot at the " + mon + " with a gun!");
 					message.author.send("The " + mon + " took **" + (dmg + mdmg) + "** damage!");
