@@ -754,7 +754,8 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 					
 								function turn(){	
 				if(hp > 0){
-				
+				console.log(hp);
+				console.log(hpE);	
 				message.author.send("HP: **" + hp + "**\n  What will you do? \n >fight \n >defend \n >skill \n >flee");
 				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
         		collector.once('collect', message => {
