@@ -696,19 +696,19 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 				if(hp2 > 0) {	
 					if(chance > 3){
 						if(statusE2 == "defending"){
-						sql2 = `UPDATE user SET status = '', hp = ${hp2 - ddmg2} WHERE id = '${statsID}'`;
+						sql2 = `UPDATE user SET status = '', hp = ${hp2 - ddmg2}, turn = ${turn2 + 1} WHERE id = '${statsID}'`;
 						con.query(sql2, console.log);
 						message.author.send("You took **" + ddmg2 + "** damage!");
 						battle();
 						} else {
-						sql2 = `UPDATE user SET hp = ${hp2 - dmg2} WHERE id = '${statsID}'`;
+						sql2 = `UPDATE user SET hp = ${hp2 - dmg2}, turn = ${turn2 + 1} WHERE id = '${statsID}'`;
 						con.query(sql2, console.log);
 						message.author.send("You took **" + dmg2 + "** damage!");
 						battle();
 						}
 					}	
 						 else {
-							sql2 = `UPDATE user SET status = 'defending' WHERE id = 'ENEMY'`;
+							sql2 = `UPDATE user SET status = 'defending', turn = ${turn2 + 1} WHERE id = 'ENEMY'`;
 							con.query(sql2, console.log);
 							message.author.send("The " + mon2 + " raised its defenses!");
 							battle();
@@ -745,7 +745,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 				var ddmg =  dmg - defE;	
 				let mon = rows[0].class
 				let Espd = rows[0].spd;	
-				
+				let turn2 = rows[0].turn;
 				
 					
 								function pturn(){	
@@ -816,7 +816,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 			
 				}	
 					
-				if(Espd > spd && cturn == 1){
+				if(Espd > spd && cturn == 1 && turn2 == 1){
 					eTurn();
 				} else {
 					pturn();
