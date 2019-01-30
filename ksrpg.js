@@ -13,8 +13,8 @@ const bot = new Discord.Client({disableEveryone: true})
 bot.on("ready", async () => {
 
 	console.log(`Let the games begin... ${bot.user.username}`);
-	var channel = bot.channels.get('537660809808183297');
-	channel.sendMessage("KS-RPG has been updated! \n Check it out with `>patches`");
+	var channel = bot.channels.get('540209185430700043');
+	channel.sendMessage("KS-RPG IS LIVE!! CHECK IT OUT WITH `>patches`");
 	bot.user.setPresence({ status: 'online', game: { name: 'being updated' } });
 
 
@@ -743,8 +743,11 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 				let statusE = rows[0].status;
 				let hpE = rows[0].hp;
 				let defE = rows[0].def;
+				let mdefE = rows[0].mDef;
 				var dmg = (atk * roll);
 				var ddmg =  dmg - defE;	
+				var mdmg = (mAtk * roll);
+				var mddmg =  mdmg - defE;	
 				let mon = rows[0].class
 				let Espd = rows[0].spd;	
 				let turn2 = rows[0].turn;
@@ -754,7 +757,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 				if(hp > 0){
 				console.log(hp);
 				console.log(hpE);	
-				message.author.send("HP: **" + hp + "**\n  What will you do? \n >fight \n >defend \n >skill \n >flee");
+				message.author.send("HP: **" + hp + "** \n Skills: **" + skills + "** \n  What will you do? `\n >fight \n >defend \n >skill [skill] \n >flee`");
 				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
         		collector.once('collect', message => {
             		if (message.content == `${prefix}fight`) {
@@ -779,7 +782,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 					eTurn();
                 		return;
             		} else if (message.content == `${prefix}skill`) {
-               			if(skills.indexOf("yeet") != -1){
+               			if(skills.indexOf("yeet") != -1 && messageArray[1] == "yeet"){
 					if(statusE == "defending"){
 					sql = `UPDATE user SET hp = ${hpE - 40}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
 					con.query(sql, console.log);
@@ -794,6 +797,54 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 					eTurn();
 					}
 				}	
+
+				if(skills.indexOf("beam") != -1 && messageArray[1] == "beam"){
+					if(statusE == "defending"){
+					sql = `UPDATE user SET hp = ${hpE - mddmg}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
+					con.query(sql, console.log);
+					message.author.send("You fired a beam at the " + mon + "!");
+					message.author.send("The " + mon + " took **" + mddmg + "** damage!");
+					eTurn();
+					} else {
+					sql = `UPDATE user SET hp = ${hpE - mdmg}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;	
+					con.query(sql, console.log);
+					message.author.send("You fired a beam at the " + mon + "!");
+					message.author.send("The " + mon + " took **" + mdmg + "** damage!");
+					eTurn();
+					}
+				}	
+
+				if(skills.indexOf("kick") != -1 && messageArray[1] == "kick"){
+					if(statusE == "defending"){
+					sql = `UPDATE user SET hp = ${hpE - (ddmg*2)}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
+					con.query(sql, console.log);
+					message.author.send("You lunged at the " + mon + " with a kick!");
+					message.author.send("The " + mon + " took **" + (ddmg*2) + "** damage!");
+					eTurn();
+					} else {
+					sql = `UPDATE user SET hp = ${hpE - dmg}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;	
+					con.query(sql, console.log);
+					message.author.send("You lunged at the " + mon + " with a kick!");
+					message.author.send("The " + mon + " took **" + (dmg*2) + "** damage!");
+					eTurn();
+					}
+				}
+
+				if(skills.indexOf("shot") != -1 && messageArray[1] == "shot"){
+					if(statusE == "defending"){
+					sql = `UPDATE user SET hp = ${hpE - (ddmg + mddmg)}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
+					con.query(sql, console.log);
+					message.author.send("You shot at the " + mon + " with a gun!");
+					message.author.send("The " + mon + " took **" + (ddmg + mddmg) + "** damage!");
+					eTurn();
+					} else {
+					sql = `UPDATE user SET hp = ${hpE - (dmg + mdmg)}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;	
+					con.query(sql, console.log);
+					message.author.send("You shot at the " + mon + " with a gun!");
+					message.author.send("The " + mon + " took **" + (dmg + mdmg) + "** damage!");
+					eTurn();
+					}
+				}		
                 		return;
             		} else if (message.content == `${prefix}flee`) {
                		var flee = Math.floor(Math.random() * 6) + 1;
@@ -1146,7 +1197,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 
 			
 			.setTitle("KS-RPG Commands")
-			.setDescription("**>help**: \n Brings up this list")
+			.setDescription("**>help**: \n Brings up this list \n **>user**: \n Creates a user. \n **>add [amount]**: \n Adds funds from KS-Bot account. \n **>view**: \n Displays your stats in a dm. Can be dm'd to bot. \n **>view [user]**: \n Displays another persons stats, but not all the details. \n **>patches**: \n Shows the updates on KSRPG, Check for bug fixes, etc. \n ***DM CHANNEL COMMANDS***: \n **>search [location]**: \n Starts your journey in a location \n **>go** \n progresses to next floor")
 			.setColor("#ff9a0c"); 
 
 		message.author.send(help);
@@ -1162,8 +1213,8 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 		let help = new Discord.RichEmbed()
 
 			
-			.setTitle("Patch Notes 1/29/29")
-			.setDescription("-TESTING RPG FUNCTIONALITIES")
+			.setTitle("Patch Notes 1/30/29")
+			.setDescription("-**KSRPG IS LIVE** \n -There is no limit to the current dungeon the forest, but rewards increase the deeper you go.\n -Working on a shop to purchase items \n -More levels coming hopefully later today, with a boss")
 			.setColor("#ff9a0c"); 
 
 		message.channel.send(help);
