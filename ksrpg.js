@@ -693,7 +693,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 				var dmg2 = (atk2 * roll2);
 				var ddmg2 =  dmg2 - defE2;	
 				var chance = Math.floor(Math.random() * 10) + 1;
-				if(hp > 0) {	
+				if(hp2 > 0) {	
 					if(chance > 3){
 						if(statusE2 == "defending"){
 						sql2 = `UPDATE user SET status = '', hp = ${hp2 - ddmg2} WHERE id = '${statsID}'`;
@@ -1022,7 +1022,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 						}
 					}	else {
 						
-						sql = `UPDATE user SET status = '', atk = ${atk}, def = ${def}, mAtk = ${mAtk} turn = ${1}, mDef = ${mDef}, spd = ${spd}, turn = ${1} WHERE id = '${statsID}'`;
+						sql = `UPDATE user SET status = '', hp = ${hp} atk = ${atk}, def = ${def}, mAtk = ${mAtk} turn = ${1}, mDef = ${mDef}, spd = ${spd}, turn = ${1} WHERE id = '${statsID}'`;
 						con.query(sql, console.log);
 						enemy();
 					}
