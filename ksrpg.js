@@ -732,7 +732,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 		let mAtk = rows[0].mAtk;
 		let mDef = rows[0].mDef;
 		let spd = rows[0].spd;	
-		let turn = rows[0].turn;	
+		let cturn = rows[0].turn;	
 		var roll = Math.floor(Math.random() * 6) + 1;	
 		
 				con.query(`SELECT * FROM user WHERE id = 'ENEMY'`, (err, rows) => {
@@ -746,7 +746,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 				let mon = rows[0].class
 				let Espd = rows[0].spd;	
 				
-				if(Espd > spd && turn == 1){
+				if(Espd > spd && cturn == 1){
 					eTurn();
 				} else {
 					turn();
@@ -762,12 +762,12 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
             		if (message.content == `${prefix}fight`) {
                		
 					if(statusE == "defending"){
-					sql = `UPDATE user SET status = '', hp = ${hp - ddmg}, turn = ${turn + 1} WHERE id = 'ENEMY'`;
+					sql = `UPDATE user SET status = '', hp = ${hp - ddmg}, turn = ${cturn + 1} WHERE id = 'ENEMY'`;
 					con.query(sql, console.log);
 					message.author.send("The " + mon + " took **" + ddmg + "** damage!");
 					eTurn();
 					} else {
-					sql = `UPDATE user SET hp = ${hp - dmg}, turn = ${turn + 1}  WHERE id = 'ENEMY'`;
+					sql = `UPDATE user SET hp = ${hp - dmg}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
 					con.query(sql, console.log);
 					message.author.send("The " + mon + " took **" + dmg + "** damage!");
 					eTurn();
@@ -775,7 +775,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 						
                 		return;
             		} else if (message.content == `${prefix}defend`) {
-               				sql = `UPDATE user SET status = 'defending', turn = ${turn + 1}  WHERE id = '${statsID}'`;
+               				sql = `UPDATE user SET status = 'defending', turn = ${cturn + 1}  WHERE id = '${statsID}'`;
 					con.query(sql, console.log);
 					message.author.send("You raised your defenses!");
 					eTurn();
@@ -783,13 +783,13 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
             		} else if (message.content == `${prefix}skill`) {
                			if(skills.indexOf("yeet") != -1){
 					if(statusE == "defending"){
-					sql = `UPDATE user SET hp = ${hp - 40}, turn = ${turn + 1}  WHERE id = 'ENEMY'`;
+					sql = `UPDATE user SET hp = ${hp - 40}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
 					con.query(sql, console.log);
 					message.author.send("You YEETED the " + mon + "!");
 					message.author.send("The " + mon + " took **40** damage!");
 					eTurn();
 					} else {
-					sql = `UPDATE user SET hp = ${hp - 40}, turn = ${turn + 1}  WHERE id = 'ENEMY'`;	
+					sql = `UPDATE user SET hp = ${hp - 40}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;	
 					con.query(sql, console.log);
 					message.author.send("You YEETED the " + mon + "!");
 					message.author.send("The " + mon + " took **40** damage!");
