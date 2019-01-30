@@ -483,8 +483,8 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 			
 			return;
 		} else{
-			sql = `DELETE FROM user WHERE id = 'ENEMY'`;
-			con.query(sql, console.log);
+			// sql = `DELETE FROM user WHERE id = 'ENEMY'`;
+			// con.query(sql, console.log);
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 		let money = rows[0].money;
@@ -499,6 +499,8 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 			sql = `UPDATE user SET money = ${money + funds} WHERE id = '${message.author.id}'`;
 			con.query(sql);
 			message.author.send("You found $" + funds +" from the defeated " + monster + "!");
+			var sql2 = `DELETE FROM user WHERE id = 'ENEMY'`;
+			con.query(sql2, console.log);
 			progress();
 			return;
 		}
