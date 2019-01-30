@@ -781,7 +781,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 					message.author.send("You raised your defenses!");
 					eTurn();
                 		return;
-            		} else if (message.content == `${prefix}skill`) {
+            		} else if (message.content == `${prefix}skill` && messageArray[1] != undefined) {
                			if(skills.indexOf("yeet") != -1 && messageArray[1] == "yeet"){
 					if(statusE == "defending"){
 					sql = `UPDATE user SET hp = ${hpE - 40}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
@@ -1214,7 +1214,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 
 			
 			.setTitle("Patch Notes 1/30/29")
-			.setDescription("-**KSRPG IS LIVE** \n -There is no limit to the current dungeon the forest, but rewards increase the deeper you go.\n -Working on a shop to purchase items \n -More levels coming hopefully later today, with a boss")
+			.setDescription("- Skills should work! -**KSRPG IS LIVE** \n -There is no limit to the current dungeon the forest, but rewards increase the deeper you go.\n -Working on a shop to purchase items \n -More levels coming hopefully later today, with a boss")
 			.setColor("#ff9a0c"); 
 
 		message.channel.send(help);
