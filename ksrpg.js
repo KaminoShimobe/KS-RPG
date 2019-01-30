@@ -781,13 +781,13 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
             		} else if (message.content == `${prefix}skill`) {
                			if(skills.indexOf("yeet") != -1){
 					if(statusE == "defending"){
-					sql = `UPDATE user SET hp = ${hp - 40}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
+					sql = `UPDATE user SET hp = ${hpE - 40}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
 					con.query(sql, console.log);
 					message.author.send("You YEETED the " + mon + "!");
 					message.author.send("The " + mon + " took **40** damage!");
 					eTurn();
 					} else {
-					sql = `UPDATE user SET hp = ${hp - 40}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;	
+					sql = `UPDATE user SET hp = ${hpE - 40}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;	
 					con.query(sql, console.log);
 					message.author.send("You YEETED the " + mon + "!");
 					message.author.send("The " + mon + " took **40** damage!");
