@@ -459,7 +459,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 			return;
 		}	else {
 			
-			var funds = turn * Math.floor(Math.random() * 9999) + 1;
+			var funds = floor * Math.floor(Math.random() * 9999) + 1;
 			
  			
 			sql = `UPDATE user SET money = ${money + funds} WHERE id = '${message.author.id}'`;
