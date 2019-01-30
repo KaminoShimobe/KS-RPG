@@ -932,12 +932,12 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 							return;
 						} else if(enem > 3 && enem < 10){
 							var eLvl = Math.floor(Math.random() * 3) + 1;
-							var eHP = 100 + (eLvl * 10);
-							var eAtk = 5 + eLvl;
-							var eDef = 3 + eLvl;
-							var emAtk = 5 + eLvl;
-							var emDef = 3 + eLvl;
-							var eSpd = 3 + eLvl;
+							var eHP = 50 + (eLvl * 10);
+							var eAtk = 1 + eLvl;
+							var eDef = 1 + eLvl;
+							var emAtk = 1 + eLvl;
+							var emDef = 1 + eLvl;
+							var eSpd = 1 + eLvl;
 							var cost =  eLvl * Math.floor(Math.random() * 99) + 1
 						sql = `INSERT INTO user (id, class, hp, atk, def, matk, mdef, spd, money, lvl, turn) VALUES ('ENEMY', 'Slime', ${eHP}, ${eAtk}, ${eDef}, ${emAtk}, ${emDef}, ${eSpd}, ${eLvl}, ${cost}, ${1})`;
 						con.query(sql, console.log);
