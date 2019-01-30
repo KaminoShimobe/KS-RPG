@@ -15,7 +15,7 @@ bot.on("ready", async () => {
 	console.log(`Let the games begin... ${bot.user.username}`);
 	var channel = bot.channels.get('540209185430700043');
 	channel.sendMessage("KS-RPG IS LIVE!! CHECK IT OUT WITH `>patches`");
-	bot.user.setPresence({ status: 'online', game: { name: '>help' } });
+	bot.user.setPresence({ status: 'online', game: { name: 'being updated' } });
 
 
 
@@ -1197,7 +1197,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 
 			
 			.setTitle("KS-RPG Commands")
-			.setDescription("**>help**: \n Brings up this list \n **>user**: \n Creates a user. \n **>add [amount]**: \n Adds funds from KS-Bot account. \n **>view**: \n Displays your stats in a dm. Can be dm'd to bot. \n **>view [user]**: \n Displays another persons stats, but not all the details. \n **>patches**: \n Shows the updates on KSRPG, Check for bug fixes, etc. \n ***DM CHANNEL COMMANDS***: \n **>search [location]**: \n Starts your journey in a location \n **>go** \n progresses to next floor")
+			.setDescription("**>help**: \n Brings up this list \n **>add [amount]**: \n Adds funds from KS-Bot account. \n **>view**: \n Displays your stats in a dm. Can be dm'd to bot. \n **>view [user]**: \n Displays another persons stats, but not all the details. \n **>patches**: \n Shows the updates on KSRPG, Check for bug fixes, etc. \n ***DM ONLY CHANNEL COMMANDS***: \n **>user**: \n Creates a user. \n **>search [location]**: \n Starts your journey in a location \n **>go** \n progresses to next floor")
 			.setColor("#ff9a0c"); 
 
 		message.author.send(help);
