@@ -247,7 +247,7 @@ bot.on("message", async message => {
 	
 	function viewUser(){
 		
-	
+	let statsID = 'ST' + message.author.id;
 con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 
@@ -269,19 +269,21 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 		let money = rows[0].money;
 		let level = rows[0].lvl;
 		let turn = rows[0].turn;
-				
 
+		con.query(`SELECT * FROM user WHERE id = '${statsID}'`, (err, rows) => {		
+			let exp = rows[0].lvl;
+			let cap = level * 100;
 		let stats = new Discord.RichEmbed()
 
 			
 			.setAuthor(message.author.username)
-			.setDescription("Lvl: " + level + " \n Class: \n" + clas + "\n Location: \n" + location +  "\n Floor: " + turn + "\n Status: \n" + status + "\n $" + money + "\n HP: " + hp + "\n ATK: " + atk + "\n DEF:" + def + "\n mAtk:" +  mAtk + "\n mDef: "+ mDef + "\n SPD: " + spd )
+			.setDescription("Lvl: " + level + "\n Exp to next level:\n" + exp + "/" + cap  " \n Class: \n" + clas + "\n Location: \n" + location +  "\n Floor: " + turn + "\n Status: \n" + status + "\n $" + money + "\n HP: " + hp + "\n ATK: " + atk + "\n DEF:" + def + "\n mAtk:" +  mAtk + "\n mDef: "+ mDef + "\n SPD: " + spd )
 			.setColor("#4286f4"); 
 
 		message.author.sendEmbed(stats);
 
 
-		
+		});
 		
 
 	});
@@ -1255,7 +1257,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 
 			
 			.setTitle("Patch Notes 1/30/29")
-			.setDescription("-New way of casting skills! \n -Wait a bit before sending too many messages. You may get bodied. \n -Can now do >skill to use your skill! \n -**KSRPG IS LIVE** \n -There is no limit to the current dungeon the forest, but rewards increase the deeper you go.\n -Working on a shop to purchase items \n -More levels coming hopefully later today, with a boss")
+			.setDescription("->view SHOULD show how much more till your next level \n -Wait a bit before sending too many messages. You may get bodied.\n-battles tell you when the monster goes first \n -Can now do >skill to use your skill! \n -**KSRPG IS LIVE** \n -There is no limit to the current dungeon the forest, but rewards increase the deeper you go.\n -Working on a shop to purchase items \n -More levels coming hopefully later today, with a boss")
 			.setColor("#ff9a0c"); 
 
 		message.channel.send(help);
