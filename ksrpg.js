@@ -757,7 +757,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 				if(hp > 0){
 				console.log(hp);
 				console.log(hpE);	
-				message.author.send("HP: **" + hp + "**\n  What will you do? \n `>fight \n >defend \n >skill \n >flee`");
+				message.author.send("HP: **" + hp + "**\n Skills: \n **" + skills + "** \n  What will you do? \n `>fight \n >defend \n >skill [skill] \n >flee`");
 				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
         		collector.once('collect', message => {
             		if (message.content == `${prefix}fight`) {
@@ -781,7 +781,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 					message.author.send("You raised your defenses!");
 					eTurn();
                 		return;
-            		} else if (message.content == `${prefix}skill`) {
+            		} else if (message.content == `${prefix}skill yeet`) {
                			if(skills.indexOf("yeet") != -1){
 					if(statusE == "defending"){
 					sql = `UPDATE user SET hp = ${hpE - 40}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
@@ -796,8 +796,12 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 					message.author.send("The " + mon + " took **40** damage!");
 					eTurn();
 					}
-				}	
-
+				}	else {
+					message.author.send("You don't have this skill!");
+					eTurn();
+				}
+				}
+				else if (message.content == `${prefix}skill beam`) {
 				if(skills.indexOf("beam") != -1){
 					if(statusE == "defending"){
 					sql = `UPDATE user SET hp = ${hpE - mddmg}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
@@ -812,8 +816,12 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 					message.author.send("The " + mon + " took **" + mdmg + "** damage!");
 					eTurn();
 					}
-				}	
-
+				}	else {
+					message.author.send("You don't have this skill!");
+					eTurn();
+				}
+					}
+				else if (message.content == `${prefix}skill kick`) {
 				if(skills.indexOf("kick") != -1){
 					if(statusE == "defending"){
 					sql = `UPDATE user SET hp = ${hpE - (ddmg*2)}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
@@ -828,8 +836,12 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 					message.author.send("The " + mon + " took **" + (dmg*2) + "** damage!");
 					eTurn();
 					}
+				} else {
+					message.author.send("You don't have this skill!");
+					eTurn();
 				}
-
+			}
+			else if (message.content == `${prefix}skill shot`) {
 				if(skills.indexOf("shot") != -1){
 					var shot = ddmg + mddmg;
 					var shot2 = dmg + mdmg
@@ -846,9 +858,35 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 					message.author.send("The " + mon + " took **" + (dmg + mdmg) + "** damage!");
 					eTurn();
 					}
-				}		
+				}	else {
+					message.author.send("You don't have this skill!");
+					eTurn();
+				}
+
                 		return;
-            		} else if (message.content == `${prefix}flee`) {
+            		} else if (message.content == `${prefix}skill ORA`) {
+				if(skills.indexOf("ORA") != -1){
+					var oraD = ddmg * Math.floor(Math.random() * 10) + 1;
+					var ora = dmg * Math.floor(Math.random() * 10) + 1;
+					if(statusE == "defending"){
+					sql = `UPDATE user SET hp = ${hpE - oraD}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
+					con.query(sql, console.log);
+					message.author.send("You hit the " + mon +" with a barrage of punches!");
+					message.author.send("The " + mon + " took **" + (ddmg*2) + "** damage!");
+					eTurn();
+					} else {
+					sql = `UPDATE user SET hp = ${hpE - ora}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;	
+					con.query(sql, console.log);
+					message.author.send("You hit the " + mon +" with a barrage of punches!");
+					message.author.send("The " + mon + " took **" + (dmg*2) + "** damage!");
+					eTurn();
+					}
+				} else {
+					message.author.send("You don't have this skill!");
+					eTurn();
+				}
+			}
+            		else if (message.content == `${prefix}flee`) {
                		var flee = Math.floor(Math.random() * 6) + 1;
 			if(flee > 2){
 				message.author.send("Got away safely");
@@ -1217,7 +1255,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 
 			
 			.setTitle("Patch Notes 1/30/29")
-			.setDescription("-Wait a bit before sending too many messages. You may get bodied.\n-battles tell you when the monster goes first \n -Can now do >skill to use your skill! \n -**KSRPG IS LIVE** \n -There is no limit to the current dungeon the forest, but rewards increase the deeper you go.\n -Working on a shop to purchase items \n -More levels coming hopefully later today, with a boss")
+			.setDescription("-New way of casting skills! \n -Wait a bit before sending too many messages. You may get bodied. \n -Can now do >skill to use your skill! \n -**KSRPG IS LIVE** \n -There is no limit to the current dungeon the forest, but rewards increase the deeper you go.\n -Working on a shop to purchase items \n -More levels coming hopefully later today, with a boss")
 			.setColor("#ff9a0c"); 
 
 		message.channel.send(help);
