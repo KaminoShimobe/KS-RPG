@@ -1022,7 +1022,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 						}
 					}	else {
 						
-						sql = `UPDATE user SET status = '', hp = ${hp} atk = ${atk}, def = ${def}, mAtk = ${mAtk} turn = ${1}, mDef = ${mDef}, spd = ${spd}, turn = ${1} WHERE id = '${statsID}'`;
+						sql = `UPDATE user SET status = '', hp = ${hp}, atk = ${atk}, def = ${def}, mAtk = ${mAtk}, mDef = ${mDef}, spd = ${spd}, turn = ${1} WHERE id = '${statsID}'`;
 						con.query(sql, console.log);
 						enemy();
 					}
