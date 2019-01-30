@@ -928,7 +928,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 							var emDef = 8 + eLvl;
 							var eSpd = 5 + eLvl;
 							var cost =  eLvl * Math.floor(Math.random() * 9999) + 1;
-						sql = `INSERT INTO user (id, class, hp, atk, def, matk, mdef, spd, money, lvl, turn) VALUES ('ENEMY', 'Dragon', ${eHP}, ${eAtk}, ${eDef}, ${emAtk}, ${emDef}, ${eSpd}, ${eLvl}, ${cost}, ${1})`;
+						sql = `INSERT INTO user (id, class, hp, atk, def, matk, mdef, spd, money, lvl, turn) VALUES ('ENEMY', 'Dragon', ${eHP}, ${eAtk}, ${eDef}, ${emAtk}, ${emDef}, ${eSpd}, ${cost}, ${eLvl}, ${1})`;
 						con.query(sql, console.log);
 						fight();
 							return;
@@ -941,7 +941,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 							var emDef = 1 + eLvl;
 							var eSpd = 1 + eLvl;
 							var cost =  eLvl * Math.floor(Math.random() * 999) + 1
-						sql = `INSERT INTO user (id, class, hp, atk, def, matk, mdef, spd, money, lvl, turn) VALUES ('ENEMY', 'Slime', ${eHP}, ${eAtk}, ${eDef}, ${emAtk}, ${emDef}, ${eSpd}, ${eLvl}, ${cost}, ${1})`;
+						sql = `INSERT INTO user (id, class, hp, atk, def, matk, mdef, spd, money, lvl, turn) VALUES ('ENEMY', 'Slime', ${eHP}, ${eAtk}, ${eDef}, ${emAtk}, ${emDef}, ${eSpd}, ${cost}, ${eLvl}, ${1})`;
 						con.query(sql, console.log);
 						fight();
 							return;
@@ -954,7 +954,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 							var emDef = 15 + eLvl;
 							var eSpd = 10 + eLvl;
 							var cost =  eLvl * Math.floor(Math.random() * 99999) + 1
-						sql = `INSERT INTO user (id, class, hp, atk, def, matk, mdef, spd, money, lvl, turn) VALUES ('ENEMY', 'Demon', ${eHP}, ${eAtk}, ${eDef}, ${emAtk}, ${emDef}, ${eSpd}, ${eLvl}, ${cost}, ${1})`;
+						sql = `INSERT INTO user (id, class, hp, atk, def, matk, mdef, spd, money, lvl, turn) VALUES ('ENEMY', 'Demon', ${eHP}, ${eAtk}, ${eDef}, ${emAtk}, ${emDef}, ${eSpd}, ${cost}, ${eLvl}, ${1})`;
 						con.query(sql, console.log);
 						fight();
 							return;
