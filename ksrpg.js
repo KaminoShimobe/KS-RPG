@@ -757,7 +757,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 				if(hp > 0){
 				console.log(hp);
 				console.log(hpE);	
-				message.author.send("HP: **" + hp + "** \n Skills: **" + skills + "** \n  What will you do? `\n >fight \n >defend \n >skill [skill] \n >flee`");
+				message.author.send("HP: **" + hp + "**\n  What will you do? \n `>fight \n >defend \n >skill \n >flee`");
 				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
         		collector.once('collect', message => {
             		if (message.content == `${prefix}fight`) {
@@ -781,8 +781,8 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 					message.author.send("You raised your defenses!");
 					eTurn();
                 		return;
-            		} else if (message.content == `${prefix}skill` && messageArray[1] != undefined) {
-               			if(skills.indexOf("yeet") != -1 && messageArray[1] == "yeet"){
+            		} else if (message.content == `${prefix}skill`) {
+               			if(skills.indexOf("yeet") != -1){
 					if(statusE == "defending"){
 					sql = `UPDATE user SET hp = ${hpE - 40}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
 					con.query(sql, console.log);
@@ -798,7 +798,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 					}
 				}	
 
-				if(skills.indexOf("beam") != -1 && messageArray[1] == "beam"){
+				if(skills.indexOf("beam") != -1){
 					if(statusE == "defending"){
 					sql = `UPDATE user SET hp = ${hpE - mddmg}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
 					con.query(sql, console.log);
@@ -814,7 +814,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 					}
 				}	
 
-				if(skills.indexOf("kick") != -1 && messageArray[1] == "kick"){
+				if(skills.indexOf("kick") != -1){
 					if(statusE == "defending"){
 					sql = `UPDATE user SET hp = ${hpE - (ddmg*2)}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
 					con.query(sql, console.log);
@@ -830,7 +830,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 					}
 				}
 
-				if(skills.indexOf("shot") != -1 && messageArray[1] == "shot"){
+				if(skills.indexOf("shot") != -1){
 					if(statusE == "defending"){
 					sql = `UPDATE user SET hp = ${hpE - (ddmg + mddmg)}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
 					con.query(sql, console.log);
@@ -1197,7 +1197,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 
 			
 			.setTitle("KS-RPG Commands")
-			.setDescription("**>help**: \n Brings up this list \n **>add [amount]**: \n Adds funds from KS-Bot account. \n **>view**: \n Displays your stats in a dm. Can be dm'd to bot. \n **>view [user]**: \n Displays another persons stats, but not all the details. \n **>patches**: \n Shows the updates on KSRPG, Check for bug fixes, etc. \n ***DM ONLY CHANNEL COMMANDS***: \n **>user**: \n Creates a user. \n **>search [location]**: \n Starts your journey in a location \n **>go** \n progresses to next floor")
+			.setDescription("**>help**: \n Brings up this list \n **>add [amount]**: \n Adds funds from KS-Bot account. \n **>view**: \n Displays your stats in a dm. Can be dm'd to bot. \n **>view [user]**: \n Displays another persons stats, but not all the details. \n **>patches**: \n Shows the updates on KSRPG, Check for bug fixes, etc. \n ***DM ONLY CHANNEL COMMANDS***: \n **>user**: \n Creates a user. \n **>search [location]**: \n Starts your journey in a location \n **>go** \n progresses to next floor \n **>leave**: \n Leaves a dungeon.")
 			.setColor("#ff9a0c"); 
 
 		message.author.send(help);
@@ -1214,7 +1214,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 
 			
 			.setTitle("Patch Notes 1/30/29")
-			.setDescription("- Skills should work! -**KSRPG IS LIVE** \n -There is no limit to the current dungeon the forest, but rewards increase the deeper you go.\n -Working on a shop to purchase items \n -More levels coming hopefully later today, with a boss")
+			.setDescription("-Can now do >skill to use your skill! \n -**KSRPG IS LIVE** \n -There is no limit to the current dungeon the forest, but rewards increase the deeper you go.\n -Working on a shop to purchase items \n -More levels coming hopefully later today, with a boss")
 			.setColor("#ff9a0c"); 
 
 		message.channel.send(help);
