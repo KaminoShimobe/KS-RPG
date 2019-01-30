@@ -15,7 +15,7 @@ bot.on("ready", async () => {
 	console.log(`Let the games begin... ${bot.user.username}`);
 	var channel = bot.channels.get('540209185430700043');
 	channel.sendMessage("KS-RPG IS LIVE!! CHECK IT OUT WITH `>patches`");
-	bot.user.setPresence({ status: 'online', game: { name: 'being updated' } });
+	bot.user.setPresence({ status: 'online', game: { name: '>help' } });
 
 
 
