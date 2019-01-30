@@ -870,7 +870,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 				}	
 					
 				if(Espd > spd && cturn == 1 && turn2 == 1){
-					message.author.send("The " + mon + " has the first attack!");
+					
 					eTurn();
 				} else {
 					pturn();
