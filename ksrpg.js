@@ -404,6 +404,17 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 
 	}
 
+	function shop(){
+		let help = new Discord.RichEmbed()
+
+			
+			.setTitle("KS-RPG SHOP >buy [item] to purchase!")
+			.setDescription("**pot** - $500 \n Heals 50 HP. Usable in battle only. \n **mpot** - $2000 \n Heals 100 HP. Usable in battle only. \n **upot** - $5000 \n Heals HP to full. Usable in battle only \n **reviv** - $10,000 \n Revives you to half hp when defeated. \n **revivu** - $25,000 \n Revives you to full hp when defeated. \n **blade** - $50,000 \n Sword that gives 30 additional damage to physical attacks \n **mwand** - $50,000 \n Magic wand that gives 30 additional magic damage to magic attacks \n **bomb** - $100,000 \n Chance to insta KO enemies, not bosses though \n **statboost** - $1,000,000 \n Permanently increases a stat \n **warp** - $1,000,000 \n You don't lose what floor you were at if you die \n **megaBoost** - $5,000,000 \n You increase all stats by 1 \n **glasses** - $10,000,000 \n Displays the stats of enemies when facing them.")
+			.setColor("#ff9a0c"); 
+
+		message.channel.send(help);
+	}
+
 	function inventory(){
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
@@ -1525,6 +1536,10 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 
 	if(command === `${prefix}inventory`){
 		inventory();
+	}
+
+	if(command === `${prefix}inventory`){
+		shop();
 	}
 			  
 			  
