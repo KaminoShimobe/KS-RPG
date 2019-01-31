@@ -1538,7 +1538,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 		inventory();
 	}
 
-	if(command === `${prefix}inventory`){
+	if(command === `${prefix}shop`){
 		shop();
 	}
 			  
