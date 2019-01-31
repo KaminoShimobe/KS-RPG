@@ -1522,6 +1522,10 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 	if(command === `${prefix}search` && messageArray[1] == "Forest"){
 		searchForest();
 	}
+
+	if(command === `${prefix}inventory`){
+		inventory();
+	}
 			  
 			  
 	
@@ -1581,8 +1585,8 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 		let help = new Discord.RichEmbed()
 
 			
-			.setTitle("Patch Notes 1/30/29")
-			.setDescription("-Buffed exp gain \n - You can now see your level progress \n -Wait a bit before sending too many messages. You may get bodied.\n-battles tell you when the monster goes first \n -Can now do >skill to use your skill! \n -**KSRPG IS LIVE** \n -There is no limit to the current dungeon the forest, but rewards increase the deeper you go.\n -Working on a shop to purchase items \n -More levels coming hopefully later today, with a boss")
+			.setTitle("Patch Notes 1/31/29")
+			.setDescription("-Working on a shop to purchase items \n- There is a boss for the first world :eyes:")
 			.setColor("#ff9a0c"); 
 
 		message.channel.send(help);
