@@ -403,6 +403,27 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 		
 
 	}
+
+	function inventory(){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let stuff = rows[0].inventory;
+		if(rows.length < 1) {
+			
+			
+			message.author.send("Create an KSRPG account with `>user`!");
+			
+		}	else {
+
+ 			
+			message.author.send("Inventory: **" + stuff + "**");
+			
+			
+		}
+			});
+		return;
+	}
 	
 	function searchForest(){
 
@@ -669,6 +690,278 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 		}
 		});		
 	}
+
+	function forestBoss(){
+		let statsID = 'ST' + message.author.id;
+	function eTurn(){
+		
+			con.query(`SELECT * FROM user WHERE id = 'ENEMY'`, (err, rows) => {
+			if(err) throw err;
+		let status2 = rows[0].status;
+		let hp2 = rows[0].hp;
+		let atk2 = rows[0].atk;
+		let def2 = rows[0].def;
+		let mAtk2 = rows[0].mAtk;
+		let mDef2 = rows[0].mDef;
+		let spd2 = rows[0].spd;	
+		let turn2 = rows[0].turn;
+		let mon2 = rows[0].class	
+		var roll2 = Math.floor(Math.random() * 6) + 1;	
+		
+				con.query(`SELECT * FROM user WHERE id = '${statsID}'`, (err, rows) => {
+				if(err) throw err;
+				let sql2;
+				let statusE2 = rows[0].status;
+				let hpE2 = rows[0].hp;
+				let mdefE2 = rows[0].mDef;
+				var dmg2 = (mAtk2 * roll2);
+				var ddmg2 =  dmg2 - mdefE2;	
+				var chance = Math.floor(Math.random() * 10) + 1;
+				if(hp2 > 0) {	
+					if(chance > 3){
+						if(statusE2 == "defending"){
+						sql2 = `UPDATE user SET status = '', hp = ${hpE2 - ddmg2}, turn = ${turn2 + 1} WHERE id = '${statsID}'`;
+						con.query(sql2, console.log);
+						message.author.send("The " + mon2 + " chanted an evil spell!");
+						message.author.send("You took **" + ddmg2 + "** damage!");
+						battle();
+						} else {
+						sql2 = `UPDATE user SET hp = ${hpE2 - dmg2}, turn = ${turn2 + 1} WHERE id = '${statsID}'`;
+						con.query(sql2, console.log);
+						message.author.send("The " + mon2 + " chanted an evil spell!");
+						message.author.send("You took **" + dmg2 + "** damage!");
+						battle();
+						}
+					}	
+						 else {
+							sql2 = `UPDATE user SET status = 'chanting', turn = ${turn2 + 1} WHERE id = 'ENEMY'`;
+							con.query(sql2, console.log);
+							message.author.send("The " + mon2 + " chanted a spell!");
+							battle();
+						}
+				}	else {
+					message.author.send("You won!")
+					forestClear();
+				}
+					});
+					});
+				
+	}
+		
+			con.query(`SELECT * FROM user WHERE id = '${statsID}'`, (err, rows) => {
+			if(err) throw err;
+		let status = rows[0].status;
+		let skills = rows[0].inventory;
+		let hp = rows[0].hp;
+		let atk = rows[0].atk;
+		let def = rows[0].def;
+		let mAtk = rows[0].mAtk;
+		let mDef = rows[0].mDef;
+		let spd = rows[0].spd;	
+		let cturn = rows[0].turn;	
+		var roll = Math.floor(Math.random() * 6) + 1;	
+		
+				con.query(`SELECT * FROM user WHERE id = 'ENEMY'`, (err, rows) => {
+				if(err) throw err;
+				let sql;
+				let sql0;
+				let statusE = rows[0].status;
+				let hpE = rows[0].hp;
+				let defE = rows[0].def;
+				let mdefE = rows[0].mDef;
+				var dmg = (atk * roll);
+				var ddmg =  dmg - defE;	
+				var mdmg = (mAtk * roll);
+				var mddmg =  mdmg - defE;	
+				let mon = rows[0].class
+				let Espd = rows[0].spd;	
+				let turn2 = rows[0].turn;
+				var kdmg = ddmg*2;
+					
+								function pturn(){	
+				if(hp > 0){
+				console.log(hp);
+				console.log(hpE);	
+				message.author.send("HP: **" + hp + "**\n Skills: \n **" + skills + "** \n  What will you do? \n `>fight \n >defend \n >skill [skill]`");
+				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+        		collector.once('collect', message => {
+            		if (message.content == `${prefix}fight`) {
+               		
+					if(statusE == "chanting"){
+					sql = `UPDATE user SET status = '', hp = ${hpE - ddmg}, turn = ${cturn + 1} WHERE id = 'ENEMY'`;
+					con.query(sql, console.log);
+					message.author.send("The " + mon + " took **" + ddmg + "** damage!");
+					sql0 = `UPDATE user hp = ${hp - ddmg}, turn = ${cturn + 1} WHERE id = '${statsID}'`;
+					con.query(sql0, console.log);
+					message.author.send("But you took **" + ddmg + "** reflected damage!");
+					eTurn();
+					} else {
+					sql = `UPDATE user SET hp = ${hpE - dmg}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
+					con.query(sql, console.log);
+					message.author.send("The " + mon + " took **" + dmg + "** damage!");
+					eTurn();
+					}
+						
+                		return;
+            		} else if (message.content == `${prefix}defend`) {
+               				sql = `UPDATE user SET status = 'defending', turn = ${cturn + 1}  WHERE id = '${statsID}'`;
+					con.query(sql, console.log);
+					message.author.send("You raised your defenses!");
+					eTurn();
+                		return;
+            		} else if (message.content == `${prefix}skill yeet`) {
+               			if(skills.indexOf("yeet") != -1){
+					if(statusE == "chanting"){
+					sql = `UPDATE user SET SET status = '', hp = ${hpE - 40}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
+					con.query(sql, console.log);
+					message.author.send("You YEETED the " + mon + "!");
+					message.author.send("The " + mon + " took **40** damage!");
+					message.author.send("The spell cannot reflect the **YEET**");
+					eTurn();
+					} else {
+					sql = `UPDATE user SET hp = ${hpE - 40}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;	
+					con.query(sql, console.log);
+					message.author.send("You YEETED the " + mon + "!");
+					message.author.send("The " + mon + " took **40** damage!");
+					eTurn();
+					}
+				}	else {
+					message.author.send("You don't have this skill!");
+					eTurn();
+				}
+				}
+				else if (message.content == `${prefix}skill beam`) {
+				if(skills.indexOf("beam") != -1){
+					if(statusE == "chanting"){
+					sql = `UPDATE user SET status = '', SET hp = ${hpE - mddmg}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
+					con.query(sql, console.log);
+					message.author.send("You fired a beam at the " + mon + "!");
+					message.author.send("The " + mon + " took **" + mddmg + "** damage!");
+					sql0 = `UPDATE user hp = ${hp - mddmg}, turn = ${cturn + 1} WHERE id = '${statsID}'`;
+					con.query(sql0, console.log);
+					message.author.send("But you took **" + mddmg + "** reflected damage!");
+					eTurn();
+					} else {
+					sql = `UPDATE user SET hp = ${hpE - mdmg}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;	
+					con.query(sql, console.log);
+					message.author.send("You fired a beam at the " + mon + "!");
+					message.author.send("The " + mon + " took **" + mdmg + "** damage!");
+					eTurn();
+					}
+				}	else {
+					message.author.send("You don't have this skill!");
+					eTurn();
+				}
+					}
+				else if (message.content == `${prefix}skill kick`) {
+				if(skills.indexOf("kick") != -1){
+					if(statusE == "chanting"){
+					sql = `UPDATE user SET status = '', SET hp = ${hpE - kdmg}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
+					con.query(sql, console.log);
+					message.author.send("You lunged at the " + mon + " with a kick!");
+					message.author.send("The " + mon + " took **" + kdmg + "** damage!");
+					sql0 = `UPDATE user hp = ${hp - ddmg}, turn = ${cturn + 1} WHERE id = '${statsID}'`;
+					con.query(sql0, console.log);
+					message.author.send("But you took **" + ddmg + "** reflected damage!");
+					eTurn();
+					} else {
+					sql = `UPDATE user SET hp = ${hpE - kdmg}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;	
+					con.query(sql, console.log);
+					message.author.send("You lunged at the " + mon + " with a kick!");
+					message.author.send("The " + mon + " took **" + kdmg + "** damage!");
+					eTurn();
+					}
+				} else {
+					message.author.send("You don't have this skill!");
+					eTurn();
+				}
+			}
+			else if (message.content == `${prefix}skill shot`) {
+				if(skills.indexOf("shot") != -1){
+					var shot = ddmg + mddmg;
+					var shot2 = dmg + mdmg
+					if(statusE == "chanting"){
+					sql = `UPDATE user SET status = '', SET hp = ${hpE - shot}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
+					con.query(sql, console.log);
+					message.author.send("You shot at the " + mon + " with a gun!");
+					message.author.send("The " + mon + " took **" + (ddmg + mddmg) + "** damage!");
+					sql0 = `UPDATE user hp = ${hp - shot}, turn = ${cturn + 1} WHERE id = '${statsID}'`;
+					con.query(sql0, console.log);
+					message.author.send("But you took **" + shot + "** reflected damage!");
+					eTurn();
+					} else {
+					sql = `UPDATE user SET hp = ${hpE - shot2}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;	
+					con.query(sql, console.log);
+					message.author.send("You shot at the " + mon + " with a gun!");
+					message.author.send("The " + mon + " took **" + (dmg + mdmg) + "** damage!");
+					eTurn();
+					}
+				}	else {
+					message.author.send("You don't have this skill!");
+					eTurn();
+				}
+
+                		return;
+            		} else if (message.content == `${prefix}skill ORA`) {
+				if(skills.indexOf("ORA") != -1){
+					var oraD = ddmg * Math.floor(Math.random() * 10) + 1;
+					var ora = dmg * Math.floor(Math.random() * 10) + 1;
+					if(statusE == "chanting"){
+					sql = `UPDATE user SET status = '', SET hp = ${hpE - oraD}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
+					con.query(sql, console.log);
+					message.author.send("You hit the " + mon +" with a barrage of punches!");
+					message.author.send("The " + mon + " took **" + oraD + "** damage!");
+					sql0 = `UPDATE user hp = ${hp - oraD}, turn = ${cturn + 1} WHERE id = '${statsID}'`;
+					con.query(sql0, console.log);
+					message.author.send("But you took **" + oraD + "** reflected damage!");
+					eTurn();
+					} else {
+					sql = `UPDATE user SET hp = ${hpE - ora}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;	
+					con.query(sql, console.log);
+					message.author.send("You hit the " + mon +" with a barrage of punches!");
+					message.author.send("The " + mon + " took **" + ora + "** damage!");
+					eTurn();
+					}
+				} else {
+					message.author.send("You don't have this skill!");
+					eTurn();
+				}
+			}
+   //          		else if (message.content == `${prefix}flee`) {
+   //             		var flee = Math.floor(Math.random() * 6) + 1;
+			// if(flee > 2){
+			// 	message.author.send("Got away safely");
+			// 	progress();
+   //              		return;
+   //          		} else {
+			// 	message.author.send("Couldn't get away...");
+			// 	eTurn();
+			// }
+			// }
+				
+				else {
+				message.author.send("Not a valid response!");
+				eTurn();	
+			}
+			});
+			} else {
+				goLose();       
+			}	
+			
+				}	
+					
+				if(Espd > spd && cturn == 1 && turn2 == 1){
+					
+					eTurn();
+				} else {
+					pturn();
+				}		
+				});	
+						
+					
+				
+			});
+	}
 	
 	
 	function battle(){
@@ -753,7 +1046,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 				let mon = rows[0].class
 				let Espd = rows[0].spd;	
 				let turn2 = rows[0].turn;
-				
+				var kdmg = ddmg*2;
 					
 								function pturn(){	
 				if(hp > 0){
@@ -786,7 +1079,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
             		} else if (message.content == `${prefix}skill yeet`) {
                			if(skills.indexOf("yeet") != -1){
 					if(statusE == "defending"){
-					sql = `UPDATE user SET hp = ${hpE - 40}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
+					sql = `UPDATE user SET status = '', SET hp = ${hpE - 40}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
 					con.query(sql, console.log);
 					message.author.send("You YEETED the " + mon + "!");
 					message.author.send("The " + mon + " took **40** damage!");
@@ -806,7 +1099,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 				else if (message.content == `${prefix}skill beam`) {
 				if(skills.indexOf("beam") != -1){
 					if(statusE == "defending"){
-					sql = `UPDATE user SET hp = ${hpE - mddmg}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
+					sql = `UPDATE user SET status = '', SET hp = ${hpE - mddmg}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
 					con.query(sql, console.log);
 					message.author.send("You fired a beam at the " + mon + "!");
 					message.author.send("The " + mon + " took **" + mddmg + "** damage!");
@@ -826,16 +1119,16 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 				else if (message.content == `${prefix}skill kick`) {
 				if(skills.indexOf("kick") != -1){
 					if(statusE == "defending"){
-					sql = `UPDATE user SET hp = ${hpE - (ddmg*2)}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
+					sql = `UPDATE user SET status = '', SET hp = ${hpE - kdmg}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
 					con.query(sql, console.log);
 					message.author.send("You lunged at the " + mon + " with a kick!");
-					message.author.send("The " + mon + " took **" + (ddmg*2) + "** damage!");
+					message.author.send("The " + mon + " took **" + kdmg + "** damage!");
 					eTurn();
 					} else {
-					sql = `UPDATE user SET hp = ${hpE - dmg}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;	
+					sql = `UPDATE user SET hp = ${hpE - kdmg}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;	
 					con.query(sql, console.log);
 					message.author.send("You lunged at the " + mon + " with a kick!");
-					message.author.send("The " + mon + " took **" + (dmg*2) + "** damage!");
+					message.author.send("The " + mon + " took **" + kdmg + "** damage!");
 					eTurn();
 					}
 				} else {
@@ -848,7 +1141,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 					var shot = ddmg + mddmg;
 					var shot2 = dmg + mdmg
 					if(statusE == "defending"){
-					sql = `UPDATE user SET hp = ${hpE - shot}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
+					sql = `UPDATE user SET status = '', SET hp = ${hpE - shot}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
 					con.query(sql, console.log);
 					message.author.send("You shot at the " + mon + " with a gun!");
 					message.author.send("The " + mon + " took **" + (ddmg + mddmg) + "** damage!");
@@ -871,7 +1164,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 					var oraD = ddmg * Math.floor(Math.random() * 10) + 1;
 					var ora = dmg * Math.floor(Math.random() * 10) + 1;
 					if(statusE == "defending"){
-					sql = `UPDATE user SET hp = ${hpE - oraD}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
+					sql = `UPDATE user SET status = '', SET hp = ${hpE - oraD}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
 					con.query(sql, console.log);
 					message.author.send("You hit the " + mon +" with a barrage of punches!");
 					message.author.send("The " + mon + " took **" + (ddmg*2) + "** damage!");
@@ -929,14 +1222,14 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 			con.query(`SELECT * FROM user WHERE id = '${statsID}'`, (err, rows) => {
 			if(err) throw err;
 			let spd = rows[0].spd;
-			let turn = rows[0].turn;	
+				
 				
 		con.query(`SELECT * FROM user WHERE id = 'ENEMY'`, (err, rows) => {
 		if(err) throw err;
 		let type = rows[0].class;
 		let eSpd = rows[0].spd;	
 			
-			if(type == "Slime" && turn < 2 ){
+			if(type == "Slime"){
 			   const booru = new Danbooru()
 		booru.posts({ tags: 'slime rating:safe', random: true }).then(posts => {
  		 // Select a random post from posts array
@@ -955,7 +1248,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 		message.author.sendEmbed(slime1);
 		battle();
   		 })
-			} else if(type == "Dragon" && turn < 2 ){
+			} else if(type == "Dragon"){
 			   const booru = new Danbooru()
 		booru.posts({ tags: 'dragon rating:safe', random: true }).then(posts => {
  		 // Select a random post from posts array
@@ -974,7 +1267,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 		message.author.sendEmbed(dragon1);
  		battle();
   		 })
-			}  else if(type == "Demon" && turn < 2 ) {
+			}  else if(type == "Demon") {
 			   const booru = new Danbooru()
 		booru.posts({ tags: 'demon rating:safe', random: true }).then(posts => {
  		 // Select a random post from posts array
@@ -994,6 +1287,26 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
  		battle();
   		 })
 			
+			} else if(type == "Wizard") {
+			   const booru = new Danbooru()
+		booru.posts({ tags: 'wizard rating:safe', random: true }).then(posts => {
+ 		 // Select a random post from posts array
+  		const index = Math.floor(Math.random() * posts.length)
+  		const post = posts[index]
+ 
+  		// Get post's url 
+ 		 const url = booru.url(post.file_url)
+ 			
+		let demon1 = new Discord.RichEmbed()
+
+			.setTitle("The **boss** wizard has appeared!")
+			.setImage(url.href)
+			.setColor("#407f3b");
+
+		message.author.sendEmbed(demon1);
+ 		forestBoss();
+  		 })
+			
 			} 
 			
 		});
@@ -1004,14 +1317,14 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 		let location = rows[0].location;
-			
+		let floor = rows[0].turn;	
 		
 				con.query(`SELECT * FROM user WHERE id = 'ENEMY'`, (err, rows) => {
 				if(err) throw err;
 				let sql;
 					
 				if(rows.length < 1) {
-					if(location == "Forest"){
+					if(location == "Forest" && floor != 100){
 						var enem = Math.floor(Math.random() * 10) + 1;
 						if(enem < 2){
 							var eLvl = Math.floor(Math.random() * 5) + 1;
@@ -1053,7 +1366,19 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 						fight();
 							return;
 						}
-					}	
+					}	else if(location == "Forest" && floor == 100){
+							var eLvl = 20;
+							var eHP = 750 
+							var eAtk = 7;
+							var eDef = 10;
+							var emAtk = 15;
+							var emDef = 15;
+							var eSpd = 10;
+							var cost =  1000000;
+						sql = `INSERT INTO user (id, class, hp, atk, def, matk, mdef, spd, money, lvl, turn) VALUES ('ENEMY', 'Wizard', ${eHP}, ${eAtk}, ${eDef}, ${emAtk}, ${emDef}, ${eSpd}, ${cost}, ${eLvl}, ${1})`;
+						con.query(sql, console.log);
+						fight();
+					}
 					else {
 						message.author.send("Location not found.");
 						return;
