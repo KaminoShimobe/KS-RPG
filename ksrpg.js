@@ -2004,7 +2004,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 					use = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
 					con.query(use, console.log);
 					message.author.send("Your revive activated!");
-					pturn();
+					eTurn();
 				} else if(items.indexOf("revivu") != -1){
 					sql = `UPDATE user SET status = '', hp = ${baseHp}, turn = ${cturn + 1}  WHERE id = '${statsID}'`;
 					con.query(sql, console.log);
@@ -2012,7 +2012,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 					use = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
 					con.query(use, console.log);
 					message.author.send("Your ultra revive activated!");
-					pturn();
+					eTurn();
 				} else {
 				goLose();    
 				}       
