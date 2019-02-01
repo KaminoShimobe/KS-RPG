@@ -840,7 +840,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 			return;
 		}
 			
-		sql = `UPDATE user SET hp = ${hp + 1}, atk = ${atk + 1}, def = ${def + 1}, mAtk = ${mAtk + 1}, mDef = ${mDef + 1}, spd = ${spd + 1}, money = ${money - 5000000}  WHERE id = '${message.author.id}'`;
+		sql = `UPDATE user SET hp = ${hp + 10}, atk = ${atk + 1}, def = ${def + 1}, mAtk = ${mAtk + 1}, mDef = ${mDef + 1}, spd = ${spd + 1}, money = ${money - 5000000}  WHERE id = '${message.author.id}'`;
 		con.query(sql);		
 		message.author.send("You increased all of your stats by 1!");
 
