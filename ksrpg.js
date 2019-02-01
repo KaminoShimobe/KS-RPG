@@ -30,7 +30,7 @@ bot.on("ready", async () => {
 		console.log(e.stack);
 
 	}
-//
+
 
 
 });
