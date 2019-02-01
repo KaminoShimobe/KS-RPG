@@ -504,7 +504,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
 			return;
 		}	
-		sql = `UPDATE user SET money = ${money - 500}, inventory = ${items}  WHERE id = '${message.author.id}'`;
+		sql = `UPDATE user SET money = ${money - 500}, inventory = '${items}'  WHERE id = '${message.author.id}'`;
 		con.query(sql);		
 		message.author.send("You bought a potion!");
 
@@ -532,7 +532,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
 			return;
 		}	
-		sql = `UPDATE user SET money = ${money - 2000}, inventory = ${items}  WHERE id = '${message.author.id}'`;
+		sql = `UPDATE user SET money = ${money - 2000}, inventory = '${items}'  WHERE id = '${message.author.id}'`;
 		con.query(sql);		
 		message.author.send("You bought a mega potion!");
 
@@ -560,7 +560,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
 			return;
 		}	
-		sql = `UPDATE user SET money = ${money - 5000}, inventory = ${items}  WHERE id = '${message.author.id}'`;
+		sql = `UPDATE user SET money = ${money - 5000}, inventory = '${items}'  WHERE id = '${message.author.id}'`;
 		con.query(sql);		
 		message.author.send("You bought an ultra potion!");
 
@@ -588,7 +588,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
 			return;
 		}	
-		sql = `UPDATE user SET money = ${money - 10000}, inventory = ${items}  WHERE id = '${message.author.id}'`;
+		sql = `UPDATE user SET money = ${money - 10000}, inventory = '${items}'  WHERE id = '${message.author.id}'`;
 		con.query(sql);		
 		message.author.send("You bought a revive!");
 
@@ -616,7 +616,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
 			return;
 		}	
-		sql = `UPDATE user SET money = ${money - 25000}, inventory = ${items}  WHERE id = '${message.author.id}'`;
+		sql = `UPDATE user SET money = ${money - 25000}, inventory = '${items}'  WHERE id = '${message.author.id}'`;
 		con.query(sql);		
 		message.author.send("You bought an ultra revive!");
 
@@ -644,7 +644,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
 			return;
 		}	
-		sql = `UPDATE user SET money = ${money - 50000}, inventory = ${items}  WHERE id = '${message.author.id}'`;
+		sql = `UPDATE user SET money = ${money - 50000}, inventory = '${items}' WHERE id = '${message.author.id}'`;
 		con.query(sql);		
 		message.author.send("You bought a blade!");
 
@@ -672,7 +672,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
 			return;
 		}	
-		sql = `UPDATE user SET money = ${money - 50000}, inventory = ${items}  WHERE id = '${message.author.id}'`;
+		sql = `UPDATE user SET money = ${money - 50000}, inventory = '${items}'  WHERE id = '${message.author.id}'`;
 		con.query(sql);		
 		message.author.send("You bought a magic wand!");
 
@@ -700,7 +700,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
 			return;
 		}	
-		sql = `UPDATE user SET money = ${money - 100000}, inventory = ${items}  WHERE id = '${message.author.id}'`;
+		sql = `UPDATE user SET money = ${money - 100000}, inventory = '${items}' WHERE id = '${message.author.id}'`;
 		con.query(sql);		
 		message.author.send("You bought a  mega potion!");
 
@@ -810,7 +810,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
 			return;
 		}	
-		sql = `UPDATE user SET money = ${money - 1000000}, inventory = ${items}  WHERE id = '${message.author.id}'`;
+		sql = `UPDATE user SET money = ${money - 1000000}, inventory = '${items}' WHERE id = '${message.author.id}'`;
 		con.query(sql);		
 		message.author.send("You bought a warp hole!");
 
@@ -868,7 +868,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
 			return;
 		}	
-		sql = `UPDATE user SET money = ${money - 10000000}, inventory = ${items}  WHERE id = '${message.author.id}'`;
+		sql = `UPDATE user SET money = ${money - 10000000}, inventory = '${items}'  WHERE id = '${message.author.id}'`;
 		con.query(sql);		
 		message.author.send("You bought some really cool glasses!");
 
