@@ -1899,7 +1899,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 				if(items.indexOf("pot") != -1){
 					var health = baseHp - hp;
 					if(health <= 50) {
-					sql = `UPDATE user SET status = '', SET hp = ${hp + health}, turn = ${cturn + 1}  WHERE id = '${statsID}'`;
+					sql = `UPDATE user SET status = '', hp = ${hp + health}, turn = ${cturn + 1}  WHERE id = '${statsID}'`;
 					con.query(sql, console.log);
 					var used = items.replace('pot\n','');
 					use = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
@@ -1907,7 +1907,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 					message.author.send("You have been healed by " + health + " points!");
 					eTurn();
 					} else {
-					sql = `UPDATE user SET status = '', SET hp = ${hp + 50}, turn = ${cturn + 1}  WHERE id = '${statsID}'`;
+					sql = `UPDATE user SET status = '', hp = ${hp + 50}, turn = ${cturn + 1}  WHERE id = '${statsID}'`;
 					con.query(sql, console.log);
 					var used = items.replace('pot\n','');
 					use = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
@@ -1923,7 +1923,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 				if(items.indexOf("mpot") != -1){
 					var health = baseHp - hp;
 					if(health <= 100) {
-					sql = `UPDATE user SET status = '', SET hp = ${hp + health}, turn = ${cturn + 1}  WHERE id = '${statsID}'`;
+					sql = `UPDATE user SET status = '', hp = ${hp + health}, turn = ${cturn + 1}  WHERE id = '${statsID}'`;
 					con.query(sql, console.log);
 					var used = items.replace('mpot\n','');
 					use = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
@@ -1931,7 +1931,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 					message.author.send("You have been healed by " + health + " points!");
 					eTurn();
 					} else {
-					sql = `UPDATE user SET status = '', SET hp = ${hp + 100}, turn = ${cturn + 1}  WHERE id = '${statsID}'`;
+					sql = `UPDATE user SET status = '', hp = ${hp + 100}, turn = ${cturn + 1}  WHERE id = '${statsID}'`;
 					con.query(sql, console.log);
 					var used = items.replace('mpot\n','');
 					use = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
@@ -1945,7 +1945,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 				}
 			}  else if (message.content == `${prefix}item upot`) {
 				if(items.indexOf("upot") != -1){
-					sql = `UPDATE user SET status = '', SET hp = ${baseHp}, turn = ${cturn + 1}  WHERE id = '${statsID}'`;
+					sql = `UPDATE user SET status = '', hp = ${baseHp}, turn = ${cturn + 1}  WHERE id = '${statsID}'`;
 					con.query(sql, console.log);
 					var used = items.replace('upot\n','');
 					use = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
