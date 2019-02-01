@@ -1998,7 +1998,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 			} else {
 				if(items.indexOf("reviv") != -1){
 					var halfHp = Math.floor(baseHp / 2);
-					sql = `UPDATE user SET status = '', SET hp = ${halfHp}, turn = ${cturn + 1}  WHERE id = '${statsID}'`;
+					sql = `UPDATE user SET status = '', hp = ${halfHp}, turn = ${cturn + 1}  WHERE id = '${statsID}'`;
 					con.query(sql, console.log);
 					var used = items.replace('reviv\n','');
 					use = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
@@ -2006,7 +2006,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 					message.author.send("Your revive activated!");
 					pturn();
 				} else if(items.indexOf("revivu") != -1){
-					sql = `UPDATE user SET status = '', SET hp = ${baseHp}, turn = ${cturn + 1}  WHERE id = '${statsID}'`;
+					sql = `UPDATE user SET status = '', hp = ${baseHp}, turn = ${cturn + 1}  WHERE id = '${statsID}'`;
 					con.query(sql, console.log);
 					var used = items.replace('revivu\n','');
 					use = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
