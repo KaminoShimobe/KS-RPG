@@ -17,7 +17,7 @@ bot.on("ready", async () => {
 	channel.sendMessage("KS-RPG IS LIVE!! \n **BIG UPDATE** \n  CHECK IT OUT WITH `>patches`");
 	bot.user.setPresence({ status: 'online', game: { name: '>help' } });
 
-
+//
 
 	try {
 
