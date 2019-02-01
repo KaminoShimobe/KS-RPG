@@ -14,7 +14,7 @@ bot.on("ready", async () => {
 
 	console.log(`Let the games begin... ${bot.user.username}`);
 	var channel = bot.channels.get('540209185430700043');
-	channel.sendMessage("KS-RPG IS LIVE!! CHECK IT OUT WITH `>patches`");
+	channel.sendMessage("KS-RPG IS LIVE!! \n **BIG UPDATE** \n  CHECK IT OUT WITH `>patches`");
 	bot.user.setPresence({ status: 'online', game: { name: '>help' } });
 
 
@@ -403,7 +403,480 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 		
 
 	}
+	if(command === `${prefix}toss` && messageArray[1] != undefined){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;	
+		let items = rows[0].inventory;
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
 
+		if(items.indexOf("pot") != -1 && messageArray[1] == "pot"){
+				var used = items.replace('pot\n','');
+				sql = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+				con.query(sql, console.log);
+				message.author.send("Tossed a potion!");
+			return;
+		}	else if(items.indexOf("mpot") != -1 && messageArray[1] == "mpot"){
+				var used = items.replace('mpot\n','');
+				sql = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+				con.query(sql, console.log);
+				message.author.send("Tossed a mega potion!");
+			return;
+		}	else if(items.indexOf("upot") != -1 && messageArray[1] == "upot"){
+				var used = items.replace('upot\n','');
+				sql = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+				con.query(sql, console.log);
+				message.author.send("Tossed an ultra potion!");
+			return;
+		}	else if(items.indexOf("reviv") != -1 && messageArray[1] == "reviv"){
+				var used = items.replace('reviv\n','');
+				sql = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+				con.query(sql, console.log);
+				message.author.send("Tossed a revive!");
+			return;
+		}	else if(items.indexOf("revivu") != -1 && messageArray[1] == "revivu"){
+				var used = items.replace('revivu\n','');
+				sql = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+				con.query(sql, console.log);
+				message.author.send("Tossed an ultra revive!");
+			return;
+		}	else if(items.indexOf("blade") != -1 && messageArray[1] == "blade"){
+				var used = items.replace('blade\n','');
+				sql = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+				con.query(sql, console.log);
+				message.author.send("Tossed a blade!");
+			return;
+		}	else if(items.indexOf("mwand") != -1 && messageArray[1] == "mwand"){
+				var used = items.replace('mwand\n','');
+				sql = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+				con.query(sql, console.log);
+				message.author.send("Tossed a magic wand!");
+			return;
+		}	else if(items.indexOf("bomb") != -1 && messageArray[1] == "bomb"){
+				var used = items.replace('bomb\n','');
+				sql = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+				con.query(sql, console.log);
+				message.author.send("Tossed a bomb!");
+			return;
+		}	else if(items.indexOf("warp") != -1 && messageArray[1] == "warp"){
+				var used = items.replace('warp\n','');
+				sql = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+				con.query(sql, console.log);
+				message.author.send("Tossed a warp hole!");
+			return;
+		}	else if(items.indexOf("glasses") != -1 && messageArray[1] == "glasses"){
+				var used = items.replace('glasses\n','');
+				sql = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+				con.query(sql, console.log);
+				message.author.send("Tossed some really cool glasses!");
+			return;
+		}	else {
+			message.author.send("You can't toss that!");
+			return;
+		}	
+		
+
+		});
+	}
+	
+	if(command === `${prefix}buy` && messageArray[1] === `pot`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;	
+		let stuff = rows[0].inventory;
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		var items = stuff + "\n" + messageArray[1];
+		if(money < 500) {
+			message.author.send("Insufficient Funds.");
+			return;
+		}
+		if(items.length > 255){
+			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
+			return;
+		}	
+		sql = `UPDATE user SET money = ${money - 500}, inventory = ${items}  WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		message.author.send("You bought a potion!");
+
+		});
+	}
+	
+	if(command === `${prefix}buy` && messageArray[1] === `mpot`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;	
+		let stuff = rows[0].inventory;
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		var items = stuff + "\n" + messageArray[1];
+		if(money < 2000) {
+			message.author.send("Insufficient Funds.");
+			return;
+		}
+		if(items.length > 255){
+			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
+			return;
+		}	
+		sql = `UPDATE user SET money = ${money - 2000}, inventory = ${items}  WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		message.author.send("You bought a mega potion!");
+
+		});
+	}
+	
+	if(command === `${prefix}buy` && messageArray[1] === `upot`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;	
+		let stuff = rows[0].inventory;
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		var items = stuff + "\n" + messageArray[1];
+		if(money < 5000) {
+			message.author.send("Insufficient Funds.");
+			return;
+		}
+		if(items.length > 255){
+			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
+			return;
+		}	
+		sql = `UPDATE user SET money = ${money - 5000}, inventory = ${items}  WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		message.author.send("You bought an ultra potion!");
+
+		});
+	}
+	
+	if(command === `${prefix}buy` && messageArray[1] === `reviv`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;	
+		let stuff = rows[0].inventory;
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		var items = stuff + "\n" + messageArray[1];
+		if(money < 10000) {
+			message.author.send("Insufficient Funds.");
+			return;
+		}
+		if(items.length > 255){
+			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
+			return;
+		}	
+		sql = `UPDATE user SET money = ${money - 10000}, inventory = ${items}  WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		message.author.send("You bought a revive!");
+
+		});
+	}
+	
+	if(command === `${prefix}buy` && messageArray[1] === `revivu`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;	
+		let stuff = rows[0].inventory;
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		var items = stuff + "\n" + messageArray[1];
+		if(money < 25000) {
+			message.author.send("Insufficient Funds.");
+			return;
+		}
+		if(items.length > 255){
+			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
+			return;
+		}	
+		sql = `UPDATE user SET money = ${money - 25000}, inventory = ${items}  WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		message.author.send("You bought an ultra revive!");
+
+		});
+	}
+	
+	 if(command === `${prefix}buy` && messageArray[1] === `blade`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;	
+		let stuff = rows[0].inventory;
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		var items = stuff + "\n" + messageArray[1];
+		if(money < 50000) {
+			message.author.send("Insufficient Funds.");
+			return;
+		}
+		if(items.length > 255){
+			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
+			return;
+		}	
+		sql = `UPDATE user SET money = ${money - 50000}, inventory = ${items}  WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		message.author.send("You bought a blade!");
+
+		});
+	}
+	
+	if(command === `${prefix}buy` && messageArray[1] === `mwand`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;	
+		let stuff = rows[0].inventory;
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		var items = stuff + "\n" + messageArray[1];
+		if(money < 50000) {
+			message.author.send("Insufficient Funds.");
+			return;
+		}
+		if(items.length > 255){
+			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
+			return;
+		}	
+		sql = `UPDATE user SET money = ${money - 50000}, inventory = ${items}  WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		message.author.send("You bought a magic wand!");
+
+		});
+	}
+	
+	if(command === `${prefix}buy` && messageArray[1] === `bomb`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let stuff = rows[0].inventory;
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		var items = stuff + "\n" + messageArray[1];
+		if(money < 100000) {
+			message.author.send("Insufficient Funds.");
+			return;
+		}
+		if(items.length > 255){
+			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
+			return;
+		}	
+		sql = `UPDATE user SET money = ${money - 100000}, inventory = ${items}  WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		message.author.send("You bought a  mega potion!");
+
+		});
+	}
+	
+	if(command === `${prefix}buy` && messageArray[1] === `statboost`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;	
+		let hp = rows[0].hp;
+		let atk = rows[0].atk;
+		let def = rows[0].def;
+		let mAtk = rows[0].mAtk;
+		let mDef = rows[0].mDef;
+		let spd = rows[0].spd;	
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		
+		if(money < 1000000) {
+			message.author.send("Insufficient Funds.");
+			return;
+		}
+			
+		sql = `UPDATE user SET money = ${money - 1000000} WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		let sql3;
+			message.author.send("Which stat would you like to allocate to? \n >hp \n >atk \n >def \n >matk \n >mdef \n >spd");
+			const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+        		collector.once('collect', message => {
+            		if (message.content == `${prefix}hp`) {
+               		
+			sql3 = `UPDATE user SET hp = ${hp + 10} WHERE id = '${message.author.id}'`;
+			con.query(sql3);
+				message.author.send("HP increased!");
+						
+                		return;
+            		} else if (message.content == `${prefix}atk`) {
+               		
+			sql3 = `UPDATE user SET atk = ${atk + 1} WHERE id = '${message.author.id}'`;
+			con.query(sql3);	
+				message.author.send("ATK increased!");
+				
+                		return;
+            		} else if (message.content == `${prefix}def`) {
+               		
+			sql3 = `UPDATE user SET def = ${def + 1} WHERE id = '${message.author.id}'`;
+			con.query(sql3);	
+				message.author.send("DEF increased!");
+						
+                		return;
+            		} else if (message.content == `${prefix}matk`) {
+               		
+			sql3 = `UPDATE user SET mAtk = ${mAtk + 1} WHERE id = '${message.author.id}'`;
+			con.query(sql3);
+				message.author.send("MATK increased!");
+					
+                		return;
+            		} else if (message.content == `${prefix}mdef`) {
+               		
+			sql3 = `UPDATE user SET mDef = ${mDef + 1} WHERE id = '${message.author.id}'`;
+			con.query(sql3);	
+				message.author.send("MDEF increased!");
+						
+                		return;
+            		} else if (message.content == `${prefix}spd`) {
+               		
+			sql3 = `UPDATE user SET spd = ${spd + 1} WHERE id = '${message.author.id}'`;
+			con.query(sql3);
+				message.author.send("spd increased!");
+						
+                		return;
+            		} else {
+			sql3 = `UPDATE user SET hp = ${hp + 10} WHERE id = '${message.author.id}'`;
+			con.query(sql3);
+				message.author.send("HP increased!");
+			
+			}	
+			});	
+
+		});
+	}
+	
+	if(command === `${prefix}buy` && messageArray[1] === `warp`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;	
+		let stuff = rows[0].inventory;
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		var items = stuff + "\n" + messageArray[1];
+		if(money < 1000000) {
+			message.author.send("Insufficient Funds.");
+			return;
+		}
+		if(items.length > 255){
+			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
+			return;
+		}	
+		sql = `UPDATE user SET money = ${money - 1000000}, inventory = ${items}  WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		message.author.send("You bought a warp hole!");
+
+		});
+	}
+	
+	if(command === `${prefix}buy` && messageArray[1] === `megaBoost`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;	
+		let hp = rows[0].hp;
+		let atk = rows[0].atk;
+		let def = rows[0].def;
+		let mAtk = rows[0].mAtk;
+		let mDef = rows[0].mDef;
+		let spd = rows[0].spd;	
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		
+		if(money < 5000000) {
+			message.author.send("Insufficient Funds.");
+			return;
+		}
+			
+		sql = `UPDATE user SET hp = ${hp + 1}, atk = ${atk + 1}, def = ${def + 1}, mAtk = ${mAtk + 1}, mDef = ${mDef + 1}, spd = ${spd + 1}, money = ${money - 5000000}  WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		message.author.send("You increased all of your stats by 1!");
+
+		});
+	}
+	
+	if(command === `${prefix}buy` && messageArray[1] === `glasses`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;	
+		let stuff = rows[0].inventory;
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		var items = stuff + "\n" + messageArray[1];
+		if(money < 10000000) {
+			message.author.send("Insufficient Funds.");
+			return;
+		}
+		if(items.length > 255){
+			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
+			return;
+		}	
+		sql = `UPDATE user SET money = ${money - 10000000}, inventory = ${items}  WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		message.author.send("You bought some really cool glasses!");
+
+		});
+	}
+	
+	
+	
 	function shop(){
 		let help = new Discord.RichEmbed()
 
@@ -456,6 +929,42 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 		}
 			});
 		return;
+	}
+	
+	function searchCave(){
+		let accessID = 'A' + message.author.id;
+		con.query(`SELECT * FROM user WHERE id = '${accessID}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		if(rows.length < 1) {
+			
+			message.author.send("You don't have access to this area!");
+			return;
+		}	else {
+
+			con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		if(rows.length < 1) {
+			
+			
+			message.author.send("Create an KSRPG account with `>user`!");
+			
+		}	else {
+
+ 			sql = `UPDATE user SET location = 'Cave', turn = ${1} WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);
+			message.author.send("Welcome to the cave! Type `>go` to progress to the next floor!");
+			
+			
+		}
+			});
+		return;
+		}
+
+
+		});
+		
 	}
 	
 	
@@ -519,6 +1028,9 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 		} else{
 			// sql = `DELETE FROM user WHERE id = 'ENEMY'`;
 			// con.query(sql, console.log);
+		if(monster == "Wizard"){
+			funds = 1000000;
+		}	
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 		let money = rows[0].money;
@@ -565,18 +1077,24 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
 		if(err) throw err;
 		let sql;
-		
+		let items = rows[0].inventory;
+		let use;	
 		if(rows.length < 1) {
 			
 			
 			
 		}	else {
 			
-			
-				sql = `UPDATE user SET location = '', turn = ${0} WHERE id = '${message.author.id}'`;
-				con.query(sql, console.log);
-				message.author.send("You have been defeated! You must start another quest with `>search [location]`");
-			
+				if(items.indexOf("warp") != -1){
+				var used = items.replace('warp\n','');
+				use = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+				con.query(use, console.log);
+				message.author.send("You have been defeated! Your warp hole activated and you didn't lose your spot in the dungeon!`");
+				} else {
+					sql = `UPDATE user SET location = '', turn = ${0} WHERE id = '${message.author.id}'`;
+					con.query(sql, console.log);
+					message.author.send("You have been defeated! You must start another quest with `>search [location]`");
+				}
 				return;
 		}
 			});	
@@ -597,6 +1115,8 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 				exp = Elvl * Math.floor(Math.random() * 25) + 1;
 			} else if(monster == "Dragon"){
 				exp = Elvl * Math.floor(Math.random() * 50) + 1;
+			} else if(monster == "Wizard"){
+				exp = Elvl * Math.floor(Math.random() * 1000) + 1;
 			} else {
 				exp = Elvl * Math.floor(Math.random() * 100) + 1;
 			}	
@@ -701,6 +1221,31 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 		}
 		});		
 	}
+	
+	function forestClear(){
+		let accessID = 'A' + message.author.id;
+		con.query(`SELECT * FROM user WHERE id = '${accessID}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		if(rows.length < 1) {
+			
+			sql = `INSERT INTO user (id, lvl) VALUES ('${accessID}', ${1})`;
+			con.query(sql, console.log);
+			message.channel.send("A new location has been found! `>search cave` to visit the next location!");
+			goExp();
+			return;
+		}	else {
+
+			message.author.send("You have cleared the Forest successfully again!");
+			goExp();
+
+			
+			return;
+		}
+
+
+		});
+	}
 
 	function forestBoss(){
 		let statsID = 'ST' + message.author.id;
@@ -789,15 +1334,28 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 				let turn2 = rows[0].turn;
 				var kdmg = ddmg*2;
 					
+					con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let use;
+		let items = rows[0].inventory;
+		let baseHp = rows[0].hp;				
+					
 								function pturn(){	
 				if(hp > 0){
 				console.log(hp);
 				console.log(hpE);	
-				message.author.send("HP: **" + hp + "**\n Skills: \n **" + skills + "** \n  What will you do? \n `>fight \n >defend \n >skill [skill]`");
+				if(items.indexOf("glasses") != -1){
+				message.author.send("Enemy stats: ??????????" );	
+				}	
+				message.author.send("HP: **" + hp + "**\n Skills: \n **" + skills + "** \n Items:" + items + " \n  What will you do? \n `>fight \n >defend \n >skill [skill] \n >item [item]`");
 				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
         		collector.once('collect', message => {
             		if (message.content == `${prefix}fight`) {
-               		
+               			if(items.indexOf("blade") != -1){
+					dmg += 30;
+					ddmg +=30;
+					message.author.send("The Blade increased your damage!");
+				}
 					if(statusE == "chanting"){
 					sql = `UPDATE user SET status = '', hp = ${hpE - ddmg}, turn = ${cturn + 1} WHERE id = 'ENEMY'`;
 					con.query(sql, console.log);
@@ -843,6 +1401,12 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 				}
 				else if (message.content == `${prefix}skill beam`) {
 				if(skills.indexOf("beam") != -1){
+					
+					if(items.indexOf("mwand") != -1){
+					mdmg += 30;
+					mddmg +=30;
+					message.author.send("The magic wand increased your damage!");
+				}
 					if(statusE == "chanting"){
 					sql = `UPDATE user SET status = '', SET hp = ${hpE - mddmg}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
 					con.query(sql, console.log);
@@ -866,6 +1430,11 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 					}
 				else if (message.content == `${prefix}skill kick`) {
 				if(skills.indexOf("kick") != -1){
+					if(items.indexOf("blade") != -1){
+					kdmg += 30;
+					ddmg +=30;
+					message.author.send("The Blade increased your damage!");
+				}
 					if(statusE == "chanting"){
 					sql = `UPDATE user SET status = '', SET hp = ${hpE - kdmg}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
 					con.query(sql, console.log);
@@ -889,6 +1458,17 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 			}
 			else if (message.content == `${prefix}skill shot`) {
 				if(skills.indexOf("shot") != -1){
+					if(items.indexOf("blade") != -1){
+					dmg += 30;
+					ddmg +=30;
+					message.author.send("The Blade increased your damage!");
+					}
+					
+					if(items.indexOf("mwand") != -1){
+					mdmg += 30;
+					mddmg +=30;
+					message.author.send("The magic wand increased your damage!");
+					}	
 					var shot = ddmg + mddmg;
 					var shot2 = dmg + mdmg
 					if(statusE == "chanting"){
@@ -915,6 +1495,11 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
                 		return;
             		} else if (message.content == `${prefix}skill ORA`) {
 				if(skills.indexOf("ORA") != -1){
+					if(items.indexOf("blade") != -1){
+					dmg += 30;
+					ddmg +=30;
+					message.author.send("The Blade increased your damage!");
+				}
 					var oraD = ddmg * Math.floor(Math.random() * 10) + 1;
 					var ora = dmg * Math.floor(Math.random() * 10) + 1;
 					if(statusE == "chanting"){
@@ -937,6 +1522,68 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 					message.author.send("You don't have this skill!");
 					eTurn();
 				}
+			} else if (message.content == `${prefix}item pot`) {
+				if(items.indexOf("pot") != -1){
+					var health = baseHp - hp;
+					if(health <= 50) {
+					sql = `UPDATE user SET status = '', SET hp = ${hp + health}, turn = ${cturn + 1}  WHERE id = '${statsID}'`;
+					con.query(sql, console.log);
+					var used = items.replace('pot\n','');
+					use = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+					con.query(use, console.log);
+					message.author.send("You have been healed by " + health + " points!");
+					eTurn();
+					} else {
+					sql = `UPDATE user SET status = '', SET hp = ${hp + 50}, turn = ${cturn + 1}  WHERE id = '${statsID}'`;
+					con.query(sql, console.log);
+					var used = items.replace('pot\n','');
+					use = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+					con.query(use, console.log);	
+					message.author.send("You have been healed by 50 points!");
+					eTurn();
+					}
+				} else {
+					message.author.send("You don't have this item!");
+					eTurn();
+				}
+			} else if (message.content == `${prefix}item mpot`) {
+				if(items.indexOf("mpot") != -1){
+					var health = baseHp - hp;
+					if(health <= 100) {
+					sql = `UPDATE user SET status = '', SET hp = ${hp + health}, turn = ${cturn + 1}  WHERE id = '${statsID}'`;
+					con.query(sql, console.log);
+					var used = items.replace('mpot\n','');
+					use = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+					con.query(use, console.log);
+					message.author.send("You have been healed by " + health + " points!");
+					eTurn();
+					} else {
+					sql = `UPDATE user SET status = '', SET hp = ${hp + 100}, turn = ${cturn + 1}  WHERE id = '${statsID}'`;
+					con.query(sql, console.log);
+					var used = items.replace('mpot\n','');
+					use = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+					con.query(use, console.log);	
+					message.author.send("You have been healed by 100 points!");
+					eTurn();
+					}
+				} else {
+					message.author.send("You don't have this item!");
+					eTurn();
+				}
+			}  else if (message.content == `${prefix}item upot`) {
+				if(items.indexOf("upot") != -1){
+					sql = `UPDATE user SET status = '', SET hp = ${baseHp}, turn = ${cturn + 1}  WHERE id = '${statsID}'`;
+					con.query(sql, console.log);
+					var used = items.replace('upot\n','');
+					use = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+					con.query(use, console.log);	
+					message.author.send("You have been healed to full health!");
+					eTurn();
+					
+				} else {
+					message.author.send("You don't have this item!");
+					eTurn();
+				}
 			}
    //          		else if (message.content == `${prefix}flee`) {
    //             		var flee = Math.floor(Math.random() * 6) + 1;
@@ -956,7 +1603,26 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 			}
 			});
 			} else {
-				goLose();       
+				if(items.indexOf("reviv") != -1){
+					var halfHp = Math.floor(baseHp / 2);
+					sql = `UPDATE user SET status = '', SET hp = ${halfHp}, turn = ${cturn + 1}  WHERE id = '${statsID}'`;
+					con.query(sql, console.log);
+					var used = items.replace('reviv\n','');
+					use = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+					con.query(use, console.log);
+					message.author.send("Your revive activated!");
+					pturn();
+				} else if(items.indexOf("revivu") != -1){
+					sql = `UPDATE user SET status = '', SET hp = ${baseHp}, turn = ${cturn + 1}  WHERE id = '${statsID}'`;
+					con.query(sql, console.log);
+					var used = items.replace('revivu\n','');
+					use = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+					con.query(use, console.log);
+					message.author.send("Your ultra revive activated!");
+					pturn();
+				} else {
+				goLose();    
+				}
 			}	
 			
 				}	
@@ -969,7 +1635,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 				}		
 				});	
 						
-					
+				});	
 				
 			});
 	}
@@ -1058,16 +1724,29 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 				let Espd = rows[0].spd;	
 				let turn2 = rows[0].turn;
 				var kdmg = ddmg*2;
-					
+					con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let use;
+		let items = rows[0].inventory;
+		let baseHp = rows[0].hp;				
+						
 								function pturn(){	
 				if(hp > 0){
 				console.log(hp);
 				console.log(hpE);	
-				message.author.send("HP: **" + hp + "**\n Skills: \n **" + skills + "** \n  What will you do? \n `>fight \n >defend \n >skill [skill] \n >flee`");
+				if(items.indexOf("glasses") != -1){
+				message.author.send("Enemy stats: \n HP: " + hpE + " \n Atk: " + rows[0].atk + "\n Def: " + defE + "\n mAtk: " + rows[0].mAtk + "\n mDef: " + mdefE + "\n Spd: " + Espd );	
+				}	
+				
+				message.author.send("HP: **" + hp + "**\n Skills: \n **" + skills + "** \n Items:" + items + " \n  What will you do? \n `>fight \n >defend \n >skill [skill] \n >item [item] \n >flee`");
 				const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
         		collector.once('collect', message => {
             		if (message.content == `${prefix}fight`) {
-               		
+               			if(items.indexOf("blade") != -1){
+					dmg += 30;
+					ddmg +=30;
+					message.author.send("The Blade increased your damage!");
+				}
 					if(statusE == "defending"){
 					sql = `UPDATE user SET status = '', hp = ${hpE - ddmg}, turn = ${cturn + 1} WHERE id = 'ENEMY'`;
 					con.query(sql, console.log);
@@ -1109,6 +1788,11 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 				}
 				else if (message.content == `${prefix}skill beam`) {
 				if(skills.indexOf("beam") != -1){
+					if(items.indexOf("mwand") != -1){
+					mdmg += 30;
+					mddmg +=30;
+					message.author.send("The magic wand increased your damage!");
+				}
 					if(statusE == "defending"){
 					sql = `UPDATE user SET status = '', SET hp = ${hpE - mddmg}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
 					con.query(sql, console.log);
@@ -1129,6 +1813,11 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 					}
 				else if (message.content == `${prefix}skill kick`) {
 				if(skills.indexOf("kick") != -1){
+					if(items.indexOf("blade") != -1){
+					kdmg += 30;
+					ddmg +=30;
+					message.author.send("The Blade increased your damage!");
+				}
 					if(statusE == "defending"){
 					sql = `UPDATE user SET status = '', SET hp = ${hpE - kdmg}, turn = ${cturn + 1}  WHERE id = 'ENEMY'`;
 					con.query(sql, console.log);
@@ -1149,6 +1838,16 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 			}
 			else if (message.content == `${prefix}skill shot`) {
 				if(skills.indexOf("shot") != -1){
+					if(items.indexOf("blade") != -1){
+					dmg += 30;
+					ddmg +=30;
+					message.author.send("The Blade increased your damage!");
+				}
+					if(items.indexOf("mwand") != -1){
+					mdmg += 30;
+					mddmg +=30;
+					message.author.send("The magic wand increased your damage!");
+				}
 					var shot = ddmg + mddmg;
 					var shot2 = dmg + mdmg
 					if(statusE == "defending"){
@@ -1172,6 +1871,11 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
                 		return;
             		} else if (message.content == `${prefix}skill ORA`) {
 				if(skills.indexOf("ORA") != -1){
+					if(items.indexOf("blade") != -1){
+					dmg += 30;
+					ddmg +=30;
+					message.author.send("The Blade increased your damage!");
+				}
 					var oraD = ddmg * Math.floor(Math.random() * 10) + 1;
 					var ora = dmg * Math.floor(Math.random() * 10) + 1;
 					if(statusE == "defending"){
@@ -1189,6 +1893,88 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 					}
 				} else {
 					message.author.send("You don't have this skill!");
+					eTurn();
+				}
+			} else if (message.content == `${prefix}item pot`) {
+				if(items.indexOf("pot") != -1){
+					var health = baseHp - hp;
+					if(health <= 50) {
+					sql = `UPDATE user SET status = '', SET hp = ${hp + health}, turn = ${cturn + 1}  WHERE id = '${statsID}'`;
+					con.query(sql, console.log);
+					var used = items.replace('pot\n','');
+					use = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+					con.query(use, console.log);
+					message.author.send("You have been healed by " + health + " points!");
+					eTurn();
+					} else {
+					sql = `UPDATE user SET status = '', SET hp = ${hp + 50}, turn = ${cturn + 1}  WHERE id = '${statsID}'`;
+					con.query(sql, console.log);
+					var used = items.replace('pot\n','');
+					use = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+					con.query(use, console.log);	
+					message.author.send("You have been healed by 50 points!");
+					eTurn();
+					}
+				} else {
+					message.author.send("You don't have this item!");
+					eTurn();
+				}
+			} else if (message.content == `${prefix}item mpot`) {
+				if(items.indexOf("mpot") != -1){
+					var health = baseHp - hp;
+					if(health <= 100) {
+					sql = `UPDATE user SET status = '', SET hp = ${hp + health}, turn = ${cturn + 1}  WHERE id = '${statsID}'`;
+					con.query(sql, console.log);
+					var used = items.replace('mpot\n','');
+					use = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+					con.query(use, console.log);
+					message.author.send("You have been healed by " + health + " points!");
+					eTurn();
+					} else {
+					sql = `UPDATE user SET status = '', SET hp = ${hp + 100}, turn = ${cturn + 1}  WHERE id = '${statsID}'`;
+					con.query(sql, console.log);
+					var used = items.replace('mpot\n','');
+					use = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+					con.query(use, console.log);	
+					message.author.send("You have been healed by 100 points!");
+					eTurn();
+					}
+				} else {
+					message.author.send("You don't have this item!");
+					eTurn();
+				}
+			}  else if (message.content == `${prefix}item upot`) {
+				if(items.indexOf("upot") != -1){
+					sql = `UPDATE user SET status = '', SET hp = ${baseHp}, turn = ${cturn + 1}  WHERE id = '${statsID}'`;
+					con.query(sql, console.log);
+					var used = items.replace('upot\n','');
+					use = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+					con.query(use, console.log);	
+					message.author.send("You have been healed to full health!");
+					eTurn();
+					
+				} else {
+					message.author.send("You don't have this item!");
+					eTurn();
+				}
+			}  else if (message.content == `${prefix}item bomb`) {
+				if(items.indexOf("bomb") != -1){
+					var dft = Math.floor(Math.random() * 2) + 1;
+					if(dft == 1) {
+					var used = items.replace('bomb\n','');
+					use = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+					con.query(use, console.log);
+					message.author.send("The monster was blown up!");
+					goExp();
+					} else {
+					var used = items.replace('bomb\n','');
+					use = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+					con.query(use, console.log);	
+					message.author.send("The bomb was a dud....");
+					eTurn();
+					}
+				} else {
+					message.author.send("You don't have this item!");
 					eTurn();
 				}
 			}
@@ -1210,17 +1996,38 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 			}
 			});
 			} else {
-				goLose();       
+				if(items.indexOf("reviv") != -1){
+					var halfHp = Math.floor(baseHp / 2);
+					sql = `UPDATE user SET status = '', SET hp = ${halfHp}, turn = ${cturn + 1}  WHERE id = '${statsID}'`;
+					con.query(sql, console.log);
+					var used = items.replace('reviv\n','');
+					use = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+					con.query(use, console.log);
+					message.author.send("Your revive activated!");
+					pturn();
+				} else if(items.indexOf("revivu") != -1){
+					sql = `UPDATE user SET status = '', SET hp = ${baseHp}, turn = ${cturn + 1}  WHERE id = '${statsID}'`;
+					con.query(sql, console.log);
+					var used = items.replace('revivu\n','');
+					use = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+					con.query(use, console.log);
+					message.author.send("Your ultra revive activated!");
+					pturn();
+				} else {
+				goLose();    
+				}       
 			}	
 			
-				}	
+				}
+						
 					
 				if(Espd > spd && cturn == 1 && turn2 == 1){
 					
 					eTurn();
 				} else {
 					pturn();
-				}		
+				}	
+					});	
 				});	
 						
 					
@@ -1419,8 +2226,8 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 		let mAtk = rows[0].mAtk;
 		let mDef = rows[0].mDef;
 		let spd = rows[0].spd;
-		
-		
+		let items = rows[0].inventory;
+	
 		
 		if(rows.length < 1) {
 			
@@ -1584,7 +2391,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 
 			
 			.setTitle("KS-RPG Commands")
-			.setDescription("**>help**: \n Brings up this list \n **>add [amount]**: \n Adds funds from KS-Bot account. \n **>view**: \n Displays your stats in a dm. Can be dm'd to bot. \n **>view [user]**: \n Displays another persons stats, but not all the details. \n **>patches**: \n Shows the updates on KSRPG, Check for bug fixes, etc. \n ***DM ONLY CHANNEL COMMANDS***: \n **>user**: \n Creates a user. \n **>search [location]**: \n Starts your journey in a location \n **>go** \n progresses to next floor \n **>leave**: \n Leaves a dungeon.")
+			.setDescription("**>help**: \n Brings up this list \n **>add [amount]**: \n Adds funds from KS-Bot account. \n **>view**: \n Displays your stats in a dm. Can be dm'd to bot. \n **>view [user]**: \n Displays another persons stats, but not all the details. \n **>patches**: \n Shows the updates on KSRPG, Check for bug fixes, etc. \n ***DM ONLY CHANNEL COMMANDS***: \n **>user**: \n Creates a user. \n **>search [location]**: \n Starts your journey in a location \n **>go** \n progresses to next floor \n **>leave**: \n Leaves a dungeon. \n **>shop**: \n Pulls up a shop. \n **>inventory**: \n Displays your current inventory.")
 			.setColor("#ff9a0c"); 
 
 		message.author.send(help);
@@ -1601,7 +2408,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 
 			
 			.setTitle("Patch Notes 1/31/29")
-			.setDescription("-Working on a shop to purchase items \n- There is a boss for the first world :eyes:")
+			.setDescription("- Check your inventory with >inventory \n -SHOP IS UP CHECK IT OUT WITH >shop \n- There is a boss for the first world :eyes:")
 			.setColor("#ff9a0c"); 
 
 		message.channel.send(help);
