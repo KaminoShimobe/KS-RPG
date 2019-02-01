@@ -702,7 +702,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 		}	
 		sql = `UPDATE user SET money = ${money - 100000}, inventory = '${items}' WHERE id = '${message.author.id}'`;
 		con.query(sql);		
-		message.author.send("You bought a  mega potion!");
+		message.author.send("You bought a bomb!");
 
 		});
 	}
