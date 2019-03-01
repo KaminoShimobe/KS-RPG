@@ -14,8 +14,8 @@ bot.on("ready", async () => {
 
 	console.log(`Let the games begin... ${bot.user.username}`);
 	var channel = bot.channels.get('540209185430700043');
-	//channel.sendMessage("KS-RPG is down until further notice. \n  Info in `>patches`");
-	bot.user.setPresence({ status: 'idle', game: { name: '>patches' } });
+	channel.sendMessage("What if you wanted to go on vacation, but god said: \n KS-RPG is live!!");
+	bot.user.setPresence({ status: 'online', game: { name: '>help' } });
 
 //
 
@@ -344,536 +344,536 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 	return;
 }
 	
-// if(command === `${prefix}add` && messageArray[1] != undefined){
+if(command === `${prefix}add` && messageArray[1] != undefined){
 		
-// 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-// 		if(err) throw err;
-// 		let sql;
-// 		let money = rows[0].money;
-// 		var funds = parseInt(messageArray[1]);	
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let money = rows[0].money;
+		var funds = parseInt(messageArray[1]);	
 	
-// 		if(rows.length < 1) {
+		if(rows.length < 1) {
 			
-// 			message.channel.send("This person doesn't have a KSRPG account!");
-// 			return;
-// 		}	else {
+			message.channel.send("This person doesn't have a KSRPG account!");
+			return;
+		}	else {
 
-// 			if(money > funds && Number.isInteger(funds) === true && funds > 0){
-// 			sql = `UPDATE user SET money = ${money - funds} WHERE id = '${message.author.id}'`;
+			if(money > funds && Number.isInteger(funds) === true && funds > 0){
+			sql = `UPDATE user SET money = ${money - funds} WHERE id = '${message.author.id}'`;
          
-//        			 con.query(sql); 
-//            		message.channel.send("!ADD " + message.author + " " + funds);
+       			 con.query(sql); 
+           		message.channel.send("!ADD " + message.author + " " + funds);
 
-// 			} else{
-// 				message.channel.send("Invalid Input.");
-// 			}
-// 			return;
-// 		}
+			} else{
+				message.channel.send("Invalid Input.");
+			}
+			return;
+		}
 
 
-// 		});
-// 	}	
-// 	if(command === `${prefix}view` && messageArray[1] === undefined){
+		});
+	}	
+	if(command === `${prefix}view` && messageArray[1] === undefined){
 			
 
-// 		viewUser();
-		
-
-			
-
-// 		 return; 
-
-		
-
-		
-
-// 	}
-
-// 	if(command === `${prefix}user`){
-			
-// 		choose();
+		viewUser();
 		
 
 			
 
-// 		 return; 
+		 return; 
 
 		
 
 		
 
-// 	}
-// 	if(command === `${prefix}toss` && messageArray[1] != undefined){
-// 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-// 		if(err) throw err;
-// 		let sql;	
-// 		let items = rows[0].inventory;
-// 		if(rows.length < 1) {
-// 			message.reply("You have no user!");
-// 			console.log(rows);
-// 			return;
-// 		}
+	}
 
-// 		if(items.indexOf("pot") != -1 && messageArray[1] == "pot"){
-// 				var used = items.replace('pot\n','');
-// 				sql = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
-// 				con.query(sql, console.log);
-// 				message.author.send("Tossed a potion!");
-// 			return;
-// 		}	else if(items.indexOf("mpot") != -1 && messageArray[1] == "mpot"){
-// 				var used = items.replace('mpot\n','');
-// 				sql = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
-// 				con.query(sql, console.log);
-// 				message.author.send("Tossed a mega potion!");
-// 			return;
-// 		}	else if(items.indexOf("upot") != -1 && messageArray[1] == "upot"){
-// 				var used = items.replace('upot\n','');
-// 				sql = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
-// 				con.query(sql, console.log);
-// 				message.author.send("Tossed an ultra potion!");
-// 			return;
-// 		}	else if(items.indexOf("reviv") != -1 && messageArray[1] == "reviv"){
-// 				var used = items.replace('reviv\n','');
-// 				sql = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
-// 				con.query(sql, console.log);
-// 				message.author.send("Tossed a revive!");
-// 			return;
-// 		}	else if(items.indexOf("revivu") != -1 && messageArray[1] == "revivu"){
-// 				var used = items.replace('revivu\n','');
-// 				sql = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
-// 				con.query(sql, console.log);
-// 				message.author.send("Tossed an ultra revive!");
-// 			return;
-// 		}	else if(items.indexOf("blade") != -1 && messageArray[1] == "blade"){
-// 				var used = items.replace('blade\n','');
-// 				sql = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
-// 				con.query(sql, console.log);
-// 				message.author.send("Tossed a blade!");
-// 			return;
-// 		}	else if(items.indexOf("mwand") != -1 && messageArray[1] == "mwand"){
-// 				var used = items.replace('mwand\n','');
-// 				sql = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
-// 				con.query(sql, console.log);
-// 				message.author.send("Tossed a magic wand!");
-// 			return;
-// 		}	else if(items.indexOf("bomb") != -1 && messageArray[1] == "bomb"){
-// 				var used = items.replace('bomb\n','');
-// 				sql = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
-// 				con.query(sql, console.log);
-// 				message.author.send("Tossed a bomb!");
-// 			return;
-// 		}	else if(items.indexOf("warp") != -1 && messageArray[1] == "warp"){
-// 				var used = items.replace('warp\n','');
-// 				sql = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
-// 				con.query(sql, console.log);
-// 				message.author.send("Tossed a warp hole!");
-// 			return;
-// 		}	else if(items.indexOf("glasses") != -1 && messageArray[1] == "glasses"){
-// 				var used = items.replace('glasses\n','');
-// 				sql = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
-// 				con.query(sql, console.log);
-// 				message.author.send("Tossed some really cool glasses!");
-// 			return;
-// 		}	else {
-// 			message.author.send("You can't toss that!");
-// 			return;
-// 		}	
-		
-
-// 		});
-// 	}
-	
-// 	if(command === `${prefix}buy` && messageArray[1] === `pot`){
-// 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-// 		if(err) throw err;
-// 		let sql;	
-// 		let stuff = rows[0].inventory;
-// 		if(rows.length < 1) {
-// 			message.reply("You have no user!");
-// 			console.log(rows);
-// 			return;
-// 		}
-
-// 		let money = rows[0].money;
-// 		var items = stuff + "\n" + messageArray[1];
-// 		if(money < 500) {
-// 			message.author.send("Insufficient Funds.");
-// 			return;
-// 		}
-// 		if(items.length > 255){
-// 			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
-// 			return;
-// 		}	
-// 		sql = `UPDATE user SET money = ${money - 500}, inventory = '${items}'  WHERE id = '${message.author.id}'`;
-// 		con.query(sql);		
-// 		message.author.send("You bought a potion!");
-
-// 		});
-// 	}
-	
-// 	if(command === `${prefix}buy` && messageArray[1] === `mpot`){
-// 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-// 		if(err) throw err;
-// 		let sql;	
-// 		let stuff = rows[0].inventory;
-// 		if(rows.length < 1) {
-// 			message.reply("You have no user!");
-// 			console.log(rows);
-// 			return;
-// 		}
-
-// 		let money = rows[0].money;
-// 		var items = stuff + "\n" + messageArray[1];
-// 		if(money < 2000) {
-// 			message.author.send("Insufficient Funds.");
-// 			return;
-// 		}
-// 		if(items.length > 255){
-// 			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
-// 			return;
-// 		}	
-// 		sql = `UPDATE user SET money = ${money - 2000}, inventory = '${items}'  WHERE id = '${message.author.id}'`;
-// 		con.query(sql);		
-// 		message.author.send("You bought a mega potion!");
-
-// 		});
-// 	}
-	
-// 	if(command === `${prefix}buy` && messageArray[1] === `upot`){
-// 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-// 		if(err) throw err;
-// 		let sql;	
-// 		let stuff = rows[0].inventory;
-// 		if(rows.length < 1) {
-// 			message.reply("You have no user!");
-// 			console.log(rows);
-// 			return;
-// 		}
-
-// 		let money = rows[0].money;
-// 		var items = stuff + "\n" + messageArray[1];
-// 		if(money < 5000) {
-// 			message.author.send("Insufficient Funds.");
-// 			return;
-// 		}
-// 		if(items.length > 255){
-// 			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
-// 			return;
-// 		}	
-// 		sql = `UPDATE user SET money = ${money - 5000}, inventory = '${items}'  WHERE id = '${message.author.id}'`;
-// 		con.query(sql);		
-// 		message.author.send("You bought an ultra potion!");
-
-// 		});
-// 	}
-	
-// 	if(command === `${prefix}buy` && messageArray[1] === `reviv`){
-// 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-// 		if(err) throw err;
-// 		let sql;	
-// 		let stuff = rows[0].inventory;
-// 		if(rows.length < 1) {
-// 			message.reply("You have no user!");
-// 			console.log(rows);
-// 			return;
-// 		}
-
-// 		let money = rows[0].money;
-// 		var items = stuff + "\n" + messageArray[1];
-// 		if(money < 10000) {
-// 			message.author.send("Insufficient Funds.");
-// 			return;
-// 		}
-// 		if(items.length > 255){
-// 			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
-// 			return;
-// 		}	
-// 		sql = `UPDATE user SET money = ${money - 10000}, inventory = '${items}'  WHERE id = '${message.author.id}'`;
-// 		con.query(sql);		
-// 		message.author.send("You bought a revive!");
-
-// 		});
-// 	}
-	
-// 	if(command === `${prefix}buy` && messageArray[1] === `revivu`){
-// 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-// 		if(err) throw err;
-// 		let sql;	
-// 		let stuff = rows[0].inventory;
-// 		if(rows.length < 1) {
-// 			message.reply("You have no user!");
-// 			console.log(rows);
-// 			return;
-// 		}
-
-// 		let money = rows[0].money;
-// 		var items = stuff + "\n" + messageArray[1];
-// 		if(money < 25000) {
-// 			message.author.send("Insufficient Funds.");
-// 			return;
-// 		}
-// 		if(items.length > 255){
-// 			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
-// 			return;
-// 		}	
-// 		sql = `UPDATE user SET money = ${money - 25000}, inventory = '${items}'  WHERE id = '${message.author.id}'`;
-// 		con.query(sql);		
-// 		message.author.send("You bought an ultra revive!");
-
-// 		});
-// 	}
-	
-// 	 if(command === `${prefix}buy` && messageArray[1] === `blade`){
-// 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-// 		if(err) throw err;
-// 		let sql;	
-// 		let stuff = rows[0].inventory;
-// 		if(rows.length < 1) {
-// 			message.reply("You have no user!");
-// 			console.log(rows);
-// 			return;
-// 		}
-
-// 		let money = rows[0].money;
-// 		var items = stuff + "\n" + messageArray[1];
-// 		if(money < 50000) {
-// 			message.author.send("Insufficient Funds.");
-// 			return;
-// 		}
-// 		if(items.length > 255){
-// 			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
-// 			return;
-// 		}	
-// 		sql = `UPDATE user SET money = ${money - 50000}, inventory = '${items}' WHERE id = '${message.author.id}'`;
-// 		con.query(sql);		
-// 		message.author.send("You bought a blade!");
-
-// 		});
-// 	}
-	
-// 	if(command === `${prefix}buy` && messageArray[1] === `mwand`){
-// 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-// 		if(err) throw err;
-// 		let sql;	
-// 		let stuff = rows[0].inventory;
-// 		if(rows.length < 1) {
-// 			message.reply("You have no user!");
-// 			console.log(rows);
-// 			return;
-// 		}
-
-// 		let money = rows[0].money;
-// 		var items = stuff + "\n" + messageArray[1];
-// 		if(money < 50000) {
-// 			message.author.send("Insufficient Funds.");
-// 			return;
-// 		}
-// 		if(items.length > 255){
-// 			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
-// 			return;
-// 		}	
-// 		sql = `UPDATE user SET money = ${money - 50000}, inventory = '${items}'  WHERE id = '${message.author.id}'`;
-// 		con.query(sql);		
-// 		message.author.send("You bought a magic wand!");
-
-// 		});
-// 	}
-	
-// 	if(command === `${prefix}buy` && messageArray[1] === `bomb`){
-// 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-// 		if(err) throw err;
-// 		let sql;
-// 		let stuff = rows[0].inventory;
-// 		if(rows.length < 1) {
-// 			message.reply("You have no user!");
-// 			console.log(rows);
-// 			return;
-// 		}
-
-// 		let money = rows[0].money;
-// 		var items = stuff + "\n" + messageArray[1];
-// 		if(money < 100000) {
-// 			message.author.send("Insufficient Funds.");
-// 			return;
-// 		}
-// 		if(items.length > 255){
-// 			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
-// 			return;
-// 		}	
-// 		sql = `UPDATE user SET money = ${money - 100000}, inventory = '${items}' WHERE id = '${message.author.id}'`;
-// 		con.query(sql);		
-// 		message.author.send("You bought a bomb!");
-
-// 		});
-// 	}
-	
-// 	if(command === `${prefix}buy` && messageArray[1] === `statboost`){
-// 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-// 		if(err) throw err;
-// 		let sql;	
-// 		let hp = rows[0].hp;
-// 		let atk = rows[0].atk;
-// 		let def = rows[0].def;
-// 		let mAtk = rows[0].mAtk;
-// 		let mDef = rows[0].mDef;
-// 		let spd = rows[0].spd;	
-// 		if(rows.length < 1) {
-// 			message.reply("You have no user!");
-// 			console.log(rows);
-// 			return;
-// 		}
-
-// 		let money = rows[0].money;
-		
-// 		if(money < 1000000) {
-// 			message.author.send("Insufficient Funds.");
-// 			return;
-// 		}
+	if(command === `${prefix}user`){
 			
-// 		sql = `UPDATE user SET money = ${money - 1000000} WHERE id = '${message.author.id}'`;
-// 		con.query(sql);		
-// 		let sql3;
-// 			message.author.send("Which stat would you like to allocate to? \n >hp \n >atk \n >def \n >matk \n >mdef \n >spd");
-// 			const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
-//         		collector.once('collect', message => {
-//             		if (message.content == `${prefix}hp`) {
+		choose();
+		
+
+			
+
+		 return; 
+
+		
+
+		
+
+	}
+	if(command === `${prefix}toss` && messageArray[1] != undefined){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;	
+		let items = rows[0].inventory;
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		if(items.indexOf("pot") != -1 && messageArray[1] == "pot"){
+				var used = items.replace('pot\n','');
+				sql = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+				con.query(sql, console.log);
+				message.author.send("Tossed a potion!");
+			return;
+		}	else if(items.indexOf("mpot") != -1 && messageArray[1] == "mpot"){
+				var used = items.replace('mpot\n','');
+				sql = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+				con.query(sql, console.log);
+				message.author.send("Tossed a mega potion!");
+			return;
+		}	else if(items.indexOf("upot") != -1 && messageArray[1] == "upot"){
+				var used = items.replace('upot\n','');
+				sql = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+				con.query(sql, console.log);
+				message.author.send("Tossed an ultra potion!");
+			return;
+		}	else if(items.indexOf("reviv") != -1 && messageArray[1] == "reviv"){
+				var used = items.replace('reviv\n','');
+				sql = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+				con.query(sql, console.log);
+				message.author.send("Tossed a revive!");
+			return;
+		}	else if(items.indexOf("revivu") != -1 && messageArray[1] == "revivu"){
+				var used = items.replace('revivu\n','');
+				sql = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+				con.query(sql, console.log);
+				message.author.send("Tossed an ultra revive!");
+			return;
+		}	else if(items.indexOf("blade") != -1 && messageArray[1] == "blade"){
+				var used = items.replace('blade\n','');
+				sql = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+				con.query(sql, console.log);
+				message.author.send("Tossed a blade!");
+			return;
+		}	else if(items.indexOf("mwand") != -1 && messageArray[1] == "mwand"){
+				var used = items.replace('mwand\n','');
+				sql = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+				con.query(sql, console.log);
+				message.author.send("Tossed a magic wand!");
+			return;
+		}	else if(items.indexOf("bomb") != -1 && messageArray[1] == "bomb"){
+				var used = items.replace('bomb\n','');
+				sql = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+				con.query(sql, console.log);
+				message.author.send("Tossed a bomb!");
+			return;
+		}	else if(items.indexOf("warp") != -1 && messageArray[1] == "warp"){
+				var used = items.replace('warp\n','');
+				sql = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+				con.query(sql, console.log);
+				message.author.send("Tossed a warp hole!");
+			return;
+		}	else if(items.indexOf("glasses") != -1 && messageArray[1] == "glasses"){
+				var used = items.replace('glasses\n','');
+				sql = `UPDATE user SET inventory = '${used}' WHERE id = '${message.author.id}'`;
+				con.query(sql, console.log);
+				message.author.send("Tossed some really cool glasses!");
+			return;
+		}	else {
+			message.author.send("You can't toss that!");
+			return;
+		}	
+		
+
+		});
+	}
+	
+	if(command === `${prefix}buy` && messageArray[1] === `pot`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;	
+		let stuff = rows[0].inventory;
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		var items = stuff + "\n" + messageArray[1];
+		if(money < 500) {
+			message.author.send("Insufficient Funds.");
+			return;
+		}
+		if(items.length > 255){
+			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
+			return;
+		}	
+		sql = `UPDATE user SET money = ${money - 500}, inventory = '${items}'  WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		message.author.send("You bought a potion!");
+
+		});
+	}
+	
+	if(command === `${prefix}buy` && messageArray[1] === `mpot`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;	
+		let stuff = rows[0].inventory;
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		var items = stuff + "\n" + messageArray[1];
+		if(money < 2000) {
+			message.author.send("Insufficient Funds.");
+			return;
+		}
+		if(items.length > 255){
+			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
+			return;
+		}	
+		sql = `UPDATE user SET money = ${money - 2000}, inventory = '${items}'  WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		message.author.send("You bought a mega potion!");
+
+		});
+	}
+	
+	if(command === `${prefix}buy` && messageArray[1] === `upot`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;	
+		let stuff = rows[0].inventory;
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		var items = stuff + "\n" + messageArray[1];
+		if(money < 5000) {
+			message.author.send("Insufficient Funds.");
+			return;
+		}
+		if(items.length > 255){
+			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
+			return;
+		}	
+		sql = `UPDATE user SET money = ${money - 5000}, inventory = '${items}'  WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		message.author.send("You bought an ultra potion!");
+
+		});
+	}
+	
+	if(command === `${prefix}buy` && messageArray[1] === `reviv`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;	
+		let stuff = rows[0].inventory;
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		var items = stuff + "\n" + messageArray[1];
+		if(money < 10000) {
+			message.author.send("Insufficient Funds.");
+			return;
+		}
+		if(items.length > 255){
+			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
+			return;
+		}	
+		sql = `UPDATE user SET money = ${money - 10000}, inventory = '${items}'  WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		message.author.send("You bought a revive!");
+
+		});
+	}
+	
+	if(command === `${prefix}buy` && messageArray[1] === `revivu`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;	
+		let stuff = rows[0].inventory;
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		var items = stuff + "\n" + messageArray[1];
+		if(money < 25000) {
+			message.author.send("Insufficient Funds.");
+			return;
+		}
+		if(items.length > 255){
+			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
+			return;
+		}	
+		sql = `UPDATE user SET money = ${money - 25000}, inventory = '${items}'  WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		message.author.send("You bought an ultra revive!");
+
+		});
+	}
+	
+	 if(command === `${prefix}buy` && messageArray[1] === `blade`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;	
+		let stuff = rows[0].inventory;
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		var items = stuff + "\n" + messageArray[1];
+		if(money < 50000) {
+			message.author.send("Insufficient Funds.");
+			return;
+		}
+		if(items.length > 255){
+			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
+			return;
+		}	
+		sql = `UPDATE user SET money = ${money - 50000}, inventory = '${items}' WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		message.author.send("You bought a blade!");
+
+		});
+	}
+	
+	if(command === `${prefix}buy` && messageArray[1] === `mwand`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;	
+		let stuff = rows[0].inventory;
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		var items = stuff + "\n" + messageArray[1];
+		if(money < 50000) {
+			message.author.send("Insufficient Funds.");
+			return;
+		}
+		if(items.length > 255){
+			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
+			return;
+		}	
+		sql = `UPDATE user SET money = ${money - 50000}, inventory = '${items}'  WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		message.author.send("You bought a magic wand!");
+
+		});
+	}
+	
+	if(command === `${prefix}buy` && messageArray[1] === `bomb`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let stuff = rows[0].inventory;
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		var items = stuff + "\n" + messageArray[1];
+		if(money < 100000) {
+			message.author.send("Insufficient Funds.");
+			return;
+		}
+		if(items.length > 255){
+			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
+			return;
+		}	
+		sql = `UPDATE user SET money = ${money - 100000}, inventory = '${items}' WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		message.author.send("You bought a bomb!");
+
+		});
+	}
+	
+	if(command === `${prefix}buy` && messageArray[1] === `statboost`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;	
+		let hp = rows[0].hp;
+		let atk = rows[0].atk;
+		let def = rows[0].def;
+		let mAtk = rows[0].mAtk;
+		let mDef = rows[0].mDef;
+		let spd = rows[0].spd;	
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
+
+		let money = rows[0].money;
+		
+		if(money < 1000000) {
+			message.author.send("Insufficient Funds.");
+			return;
+		}
+			
+		sql = `UPDATE user SET money = ${money - 1000000} WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		let sql3;
+			message.author.send("Which stat would you like to allocate to? \n >hp \n >atk \n >def \n >matk \n >mdef \n >spd");
+			const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 100000000 });
+        		collector.once('collect', message => {
+            		if (message.content == `${prefix}hp`) {
                		
-// 			sql3 = `UPDATE user SET hp = ${hp + 10} WHERE id = '${message.author.id}'`;
-// 			con.query(sql3);
-// 				message.author.send("HP increased!");
+			sql3 = `UPDATE user SET hp = ${hp + 10} WHERE id = '${message.author.id}'`;
+			con.query(sql3);
+				message.author.send("HP increased!");
 						
-//                 		return;
-//             		} else if (message.content == `${prefix}atk`) {
+                		return;
+            		} else if (message.content == `${prefix}atk`) {
                		
-// 			sql3 = `UPDATE user SET atk = ${atk + 1} WHERE id = '${message.author.id}'`;
-// 			con.query(sql3);	
-// 				message.author.send("ATK increased!");
+			sql3 = `UPDATE user SET atk = ${atk + 1} WHERE id = '${message.author.id}'`;
+			con.query(sql3);	
+				message.author.send("ATK increased!");
 				
-//                 		return;
-//             		} else if (message.content == `${prefix}def`) {
+                		return;
+            		} else if (message.content == `${prefix}def`) {
                		
-// 			sql3 = `UPDATE user SET def = ${def + 1} WHERE id = '${message.author.id}'`;
-// 			con.query(sql3);	
-// 				message.author.send("DEF increased!");
+			sql3 = `UPDATE user SET def = ${def + 1} WHERE id = '${message.author.id}'`;
+			con.query(sql3);	
+				message.author.send("DEF increased!");
 						
-//                 		return;
-//             		} else if (message.content == `${prefix}matk`) {
+                		return;
+            		} else if (message.content == `${prefix}matk`) {
                		
-// 			sql3 = `UPDATE user SET mAtk = ${mAtk + 1} WHERE id = '${message.author.id}'`;
-// 			con.query(sql3);
-// 				message.author.send("MATK increased!");
+			sql3 = `UPDATE user SET mAtk = ${mAtk + 1} WHERE id = '${message.author.id}'`;
+			con.query(sql3);
+				message.author.send("MATK increased!");
 					
-//                 		return;
-//             		} else if (message.content == `${prefix}mdef`) {
+                		return;
+            		} else if (message.content == `${prefix}mdef`) {
                		
-// 			sql3 = `UPDATE user SET mDef = ${mDef + 1} WHERE id = '${message.author.id}'`;
-// 			con.query(sql3);	
-// 				message.author.send("MDEF increased!");
+			sql3 = `UPDATE user SET mDef = ${mDef + 1} WHERE id = '${message.author.id}'`;
+			con.query(sql3);	
+				message.author.send("MDEF increased!");
 						
-//                 		return;
-//             		} else if (message.content == `${prefix}spd`) {
+                		return;
+            		} else if (message.content == `${prefix}spd`) {
                		
-// 			sql3 = `UPDATE user SET spd = ${spd + 1} WHERE id = '${message.author.id}'`;
-// 			con.query(sql3);
-// 				message.author.send("spd increased!");
+			sql3 = `UPDATE user SET spd = ${spd + 1} WHERE id = '${message.author.id}'`;
+			con.query(sql3);
+				message.author.send("spd increased!");
 						
-//                 		return;
-//             		} else {
-// 			sql3 = `UPDATE user SET hp = ${hp + 10} WHERE id = '${message.author.id}'`;
-// 			con.query(sql3);
-// 				message.author.send("HP increased!");
+                		return;
+            		} else {
+			sql3 = `UPDATE user SET hp = ${hp + 10} WHERE id = '${message.author.id}'`;
+			con.query(sql3);
+				message.author.send("HP increased!");
 			
-// 			}	
-// 			});	
+			}	
+			});	
 
-// 		});
-// 	}
+		});
+	}
 	
-// 	if(command === `${prefix}buy` && messageArray[1] === `warp`){
-// 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-// 		if(err) throw err;
-// 		let sql;	
-// 		let stuff = rows[0].inventory;
-// 		if(rows.length < 1) {
-// 			message.reply("You have no user!");
-// 			console.log(rows);
-// 			return;
-// 		}
+	if(command === `${prefix}buy` && messageArray[1] === `warp`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;	
+		let stuff = rows[0].inventory;
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
 
-// 		let money = rows[0].money;
-// 		var items = stuff + "\n" + messageArray[1];
-// 		if(money < 1000000) {
-// 			message.author.send("Insufficient Funds.");
-// 			return;
-// 		}
-// 		if(items.length > 255){
-// 			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
-// 			return;
-// 		}	
-// 		sql = `UPDATE user SET money = ${money - 1000000}, inventory = '${items}' WHERE id = '${message.author.id}'`;
-// 		con.query(sql);		
-// 		message.author.send("You bought a warp hole!");
+		let money = rows[0].money;
+		var items = stuff + "\n" + messageArray[1];
+		if(money < 1000000) {
+			message.author.send("Insufficient Funds.");
+			return;
+		}
+		if(items.length > 255){
+			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
+			return;
+		}	
+		sql = `UPDATE user SET money = ${money - 1000000}, inventory = '${items}' WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		message.author.send("You bought a warp hole!");
 
-// 		});
-// 	}
+		});
+	}
 	
-// 	if(command === `${prefix}buy` && messageArray[1] === `megaBoost`){
-// 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-// 		if(err) throw err;
-// 		let sql;	
-// 		let hp = rows[0].hp;
-// 		let atk = rows[0].atk;
-// 		let def = rows[0].def;
-// 		let mAtk = rows[0].mAtk;
-// 		let mDef = rows[0].mDef;
-// 		let spd = rows[0].spd;	
-// 		if(rows.length < 1) {
-// 			message.reply("You have no user!");
-// 			console.log(rows);
-// 			return;
-// 		}
+	if(command === `${prefix}buy` && messageArray[1] === `megaBoost`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;	
+		let hp = rows[0].hp;
+		let atk = rows[0].atk;
+		let def = rows[0].def;
+		let mAtk = rows[0].mAtk;
+		let mDef = rows[0].mDef;
+		let spd = rows[0].spd;	
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
 
-// 		let money = rows[0].money;
+		let money = rows[0].money;
 		
-// 		if(money < 5000000) {
-// 			message.author.send("Insufficient Funds.");
-// 			return;
-// 		}
+		if(money < 5000000) {
+			message.author.send("Insufficient Funds.");
+			return;
+		}
 			
-// 		sql = `UPDATE user SET hp = ${hp + 10}, atk = ${atk + 1}, def = ${def + 1}, mAtk = ${mAtk + 1}, mDef = ${mDef + 1}, spd = ${spd + 1}, money = ${money - 5000000}  WHERE id = '${message.author.id}'`;
-// 		con.query(sql);		
-// 		message.author.send("You increased all of your stats by 1!");
+		sql = `UPDATE user SET hp = ${hp + 10}, atk = ${atk + 1}, def = ${def + 1}, mAtk = ${mAtk + 1}, mDef = ${mDef + 1}, spd = ${spd + 1}, money = ${money - 5000000}  WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		message.author.send("You increased all of your stats by 1!");
 
-// 		});
-// 	}
+		});
+	}
 	
-// 	if(command === `${prefix}buy` && messageArray[1] === `glasses`){
-// 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-// 		if(err) throw err;
-// 		let sql;	
-// 		let stuff = rows[0].inventory;
-// 		if(rows.length < 1) {
-// 			message.reply("You have no user!");
-// 			console.log(rows);
-// 			return;
-// 		}
+	if(command === `${prefix}buy` && messageArray[1] === `glasses`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;	
+		let stuff = rows[0].inventory;
+		if(rows.length < 1) {
+			message.reply("You have no user!");
+			console.log(rows);
+			return;
+		}
 
-// 		let money = rows[0].money;
-// 		var items = stuff + "\n" + messageArray[1];
-// 		if(money < 10000000) {
-// 			message.author.send("Insufficient Funds.");
-// 			return;
-// 		}
-// 		if(items.length > 255){
-// 			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
-// 			return;
-// 		}	
-// 		sql = `UPDATE user SET money = ${money - 10000000}, inventory = '${items}'  WHERE id = '${message.author.id}'`;
-// 		con.query(sql);		
-// 		message.author.send("You bought some really cool glasses!");
+		let money = rows[0].money;
+		var items = stuff + "\n" + messageArray[1];
+		if(money < 10000000) {
+			message.author.send("Insufficient Funds.");
+			return;
+		}
+		if(items.length > 255){
+			message.author.send("Your inventory is full! >toss [item] to get rid of an item!");
+			return;
+		}	
+		sql = `UPDATE user SET money = ${money - 10000000}, inventory = '${items}'  WHERE id = '${message.author.id}'`;
+		con.query(sql);		
+		message.author.send("You bought some really cool glasses!");
 
-// 		});
-// 	}
+		});
+	}
 	
 	
 	
@@ -2277,34 +2277,34 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 	
 	}	
 			
-// 	if(command === `${prefix}go`){
-// 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-// 		if(err) throw err;
-// 		let sql;
-// 		let location = rows[0].location;
-// 		if(rows.length < 1) {
+	if(command === `${prefix}go`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		let location = rows[0].location;
+		if(rows.length < 1) {
 			
 			
-// 			message.author.send("Create an KSRPG account with `>user`!");
+			message.author.send("Create an KSRPG account with `>user`!");
 			
-// 		}	else {
+		}	else {
 			
-// 			if(location == "Forest"){
-// 		var chance = Math.floor(Math.random() * 10) + 1;
-// 		if(chance > 3){
-// 			goBattle();
-// 		} else if(chance < 3){
-// 			progress();
-// 		} else {
-// 			goFunds();
-// 		}
-// 		} else {
-// 			message.author.send("Start a quest with `>search Forest`!");
-// 			return;
-// 		}
-// 		 return; 
-// 		}
-// 			});
+			if(location == "Forest"){
+		var chance = Math.floor(Math.random() * 10) + 1;
+		if(chance > 3){
+			goBattle();
+		} else if(chance < 3){
+			progress();
+		} else {
+			goFunds();
+		}
+		} else {
+			message.author.send("Start a quest with `>search Forest`!");
+			return;
+		}
+		 return; 
+		}
+			});
 		
 		
 
@@ -2312,76 +2312,76 @@ con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) =>
 
 		
 
-// 	}	
+	}	
 			
-// 	if(command === `${prefix}leave`){
-// 		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
-// 		if(err) throw err;
-// 		let sql;
-// 		if(rows.length < 1) {
+	if(command === `${prefix}leave`){
+		con.query(`SELECT * FROM user WHERE id = '${message.author.id}'`, (err, rows) => {
+		if(err) throw err;
+		let sql;
+		if(rows.length < 1) {
 			
-// 		message.author.send("You don't have a journey to end!");
-// 			return;
-// 		}	else {
+		message.author.send("You don't have a journey to end!");
+			return;
+		}	else {
 
 	
 			
-//  			sql = `UPDATE user SET location = '', turn = ${1} WHERE id = '${message.author.id}'`;
-// 			con.query(sql, console.log);
-// 			message.author.send("Journey ended!");
+ 			sql = `UPDATE user SET location = '', turn = ${1} WHERE id = '${message.author.id}'`;
+			con.query(sql, console.log);
+			message.author.send("Journey ended!");
 			
-// 			return;
+			return;
 			
 			
-// 		}
-// 			});
-// 	}
+		}
+			});
+	}
 		
-// 	if(command === `${prefix}search` && messageArray[1] == "Forest"){
-// 		searchForest();
-// 	}
+	if(command === `${prefix}search` && messageArray[1] == "Forest"){
+		searchForest();
+	}
 
-// 	if(command === `${prefix}inventory`){
-// 		inventory();
-// 	}
+	if(command === `${prefix}inventory`){
+		inventory();
+	}
 
-// 	if(command === `${prefix}shop`){
-// 		shop();
-// 	}
+	if(command === `${prefix}shop`){
+		shop();
+	}
 			  
 			  
 	
 	if(message.channel.type === "dm") return;
 	
-// 	if(command === `${prefix}view` && messageArray[1] != undefined ){
+	if(command === `${prefix}view` && messageArray[1] != undefined ){
 			
-// 		viewOtherUser();
+		viewOtherUser();
 		
 
 			
 
-// 		 return; 
+		 return; 
 
 		
 
 		
 
-// 	}
+	}
 	
-// 	if(command === `${prefix}delete`){
+	if(command === `${prefix}delete`){
 			
-// 		deleteUser();
+		deleteUser();
 		
 
 			
 
-// 		 return; 
+		 return; 
 
 		
 
 		
 
-// 	}
+	}
 	
 	
 	
