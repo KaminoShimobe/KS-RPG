@@ -14,7 +14,7 @@ bot.on("ready", async () => {
 
 	console.log(`Let the games begin... ${bot.user.username}`);
 	var channel = bot.channels.get('540209185430700043');
-	channel.sendMessage("What if you wanted to go on vacation, but god said: \n KS-RPG is live!!");
+	channel.sendMessage("What if you wanted to go on vacation, but god said: \n KS-RPG is live!! \n >patches for more details!");
 	bot.user.setPresence({ status: 'online', game: { name: '>help' } });
 
 //
@@ -2407,8 +2407,8 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 		let help = new Discord.RichEmbed()
 
 			
-			.setTitle("Patch Notes 2/3/29")
-			.setDescription("- KS-RPG down until further notice. Changes will be made to money scaling, levels, and inventory. Changes may result in loss of money for the sake of economy, but will be made up in exclusive items.")
+			.setTitle("Patch Notes 3/1/19")
+			.setDescription("- KS-RPG is up and changes are being actively made!")
 			.setColor("#ff9a0c"); 
 
 		message.channel.send(help);
