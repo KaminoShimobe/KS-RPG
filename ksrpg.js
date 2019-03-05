@@ -14,7 +14,7 @@ bot.on("ready", async () => {
 
 	console.log(`Let the games begin... ${bot.user.username}`);
 	var channel = bot.channels.get('540209185430700043');
-	channel.sendMessage("What if you wanted to go on vacation, but god said: \n KS-RPG is live!! \n >patches for more details!");
+	channel.sendMessage("**Better nerf Greninja cus** \n KS-RPG is live!! \n >patches for more details!");
 	bot.user.setPresence({ status: 'online', game: { name: '>help' } });
 
 //
@@ -2152,7 +2152,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 							var emAtk = 10 + eLvl;
 							var emDef = 8 + eLvl;
 							var eSpd = 5 + eLvl;
-							var cost =  eLvl * Math.floor(Math.random() * 9999) + 1;
+							var cost =  eLvl * Math.floor(Math.random() * 999) + 1;
 						sql = `INSERT INTO user (id, class, hp, atk, def, matk, mdef, spd, money, lvl, turn) VALUES ('ENEMY', 'Dragon', ${eHP}, ${eAtk}, ${eDef}, ${emAtk}, ${emDef}, ${eSpd}, ${cost}, ${eLvl}, ${1})`;
 						con.query(sql, console.log);
 						fight();
@@ -2165,7 +2165,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 							var emAtk = 1 + eLvl;
 							var emDef = 1 + eLvl;
 							var eSpd = 1 + eLvl;
-							var cost =  eLvl * Math.floor(Math.random() * 999) + 1
+							var cost =  eLvl * Math.floor(Math.random() * 99) + 1
 						sql = `INSERT INTO user (id, class, hp, atk, def, matk, mdef, spd, money, lvl, turn) VALUES ('ENEMY', 'Slime', ${eHP}, ${eAtk}, ${eDef}, ${emAtk}, ${emDef}, ${eSpd}, ${cost}, ${eLvl}, ${1})`;
 						con.query(sql, console.log);
 						fight();
@@ -2178,7 +2178,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 							var emAtk = 20 + eLvl;
 							var emDef = 15 + eLvl;
 							var eSpd = 10 + eLvl;
-							var cost =  eLvl * Math.floor(Math.random() * 99999) + 1
+							var cost =  eLvl * Math.floor(Math.random() * 9999) + 1
 						sql = `INSERT INTO user (id, class, hp, atk, def, matk, mdef, spd, money, lvl, turn) VALUES ('ENEMY', 'Demon', ${eHP}, ${eAtk}, ${eDef}, ${emAtk}, ${emDef}, ${eSpd}, ${cost}, ${eLvl}, ${1})`;
 						con.query(sql, console.log);
 						fight();
@@ -2408,7 +2408,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 
 			
 			.setTitle("Patch Notes 3/1/19")
-			.setDescription("- KS-RPG is up and changes are being actively made!")
+			.setDescription("- Monetary gain has been nerfed slightly \n -Bomb glitch is being actively tested. Please check if the bomb is the last item in your party \n - Other bug fixes")
 			.setColor("#ff9a0c"); 
 
 		message.channel.send(help);
