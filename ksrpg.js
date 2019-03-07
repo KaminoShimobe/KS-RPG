@@ -14,7 +14,7 @@ bot.on("ready", async () => {
 
 	console.log(`Let the games begin... ${bot.user.username}`);
 	var channel = bot.channels.get('540209185430700043');
-	channel.sendMessage("**Better nerf Greninja cus** \n KS-RPG is live!! \n >patches for more details!");
+	channel.sendMessage("**So many bugs we need to call in the raid** \n KS-RPG is live!! \n >patches for more details!");
 	bot.user.setPresence({ status: 'online', game: { name: '>help' } });
 
 //
@@ -2391,7 +2391,7 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 
 			
 			.setTitle("KS-RPG Commands")
-			.setDescription("**>help**: \n Brings up this list \n **>add [amount]**: \n Adds funds from KS-Bot account. \n **>view**: \n Displays your stats in a dm. Can be dm'd to bot. \n **>view [user]**: \n Displays another persons stats, but not all the details. \n **>patches**: \n Shows the updates on KSRPG, Check for bug fixes, etc. \n ***DM ONLY CHANNEL COMMANDS***: \n **>user**: \n Creates a user. \n **>search [location]**: \n Starts your journey in a location \n **>go** \n progresses to next floor \n **>leave**: \n Leaves a dungeon. \n **>shop**: \n Pulls up a shop. \n **>inventory**: \n Displays your current inventory.")
+			.setDescription("**>help**: \n Brings up this list \n **>add [amount]**: \n Adds funds from KS-Bot account. \n **>view**: \n Displays your stats in a dm. Can be dm'd to bot. \n **>view [user]**: \n Displays another persons stats, but not all the details. \n **>patches**: \n Shows the updates on KSRPG, Check for bug fixes, etc. \n ***DM ONLY CHANNEL COMMANDS***: \n **>user**: \n Creates a user. \n **>search [location]**: \n Starts your journey in a location \n **>go** \n progresses to next floor \n **>leave**: \n Leaves a dungeon. \n **>shop**: \n Pulls up a shop. \n **>inventory**: \n Displays your current inventory. \n **>toss [item]**: \n Discards an item in your inventory.")
 			.setColor("#ff9a0c"); 
 
 		message.author.send(help);
@@ -2407,8 +2407,8 @@ if(command === `${prefix}add` && messageArray[1] != undefined){
 		let help = new Discord.RichEmbed()
 
 			
-			.setTitle("Patch Notes 3/1/19")
-			.setDescription("- Monetary gain has been nerfed slightly \n -Bomb glitch is being actively tested. Please check if the bomb is the last item in your party \n - Other bug fixes")
+			.setTitle("Patch Notes 3/7/19")
+			.setDescription(" - Added >toss to >help - Monetary gain has been nerfed slightly \n -Bomb glitch is being actively tested. Please check if the bomb is the last item in your party \n - Other bug fixes")
 			.setColor("#ff9a0c"); 
 
 		message.channel.send(help);
