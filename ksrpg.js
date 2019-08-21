@@ -14,8 +14,8 @@ bot.on("ready", async () => {
 
 	console.log(`Let the games begin... ${bot.user.username}`);
 	var channel = bot.channels.get('540209185430700043');
-	channel.sendMessage("KS-RPG is down at the moment! \n >patches for more details!");
-	bot.user.setPresence({ status: 'busy', game: { name: '>help' } });
+	//channel.sendMessage("KS-RPG is down at the moment! \n >patches for more details!");
+	bot.user.setPresence({ status: 'idle', game: { name: '[REWORK]' } });
 
 //
 
